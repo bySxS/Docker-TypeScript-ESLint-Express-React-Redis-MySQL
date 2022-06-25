@@ -1,11 +1,25 @@
-import { Model }  from 'objection/typings/objection'
-import { dbKnex } from '../db'
+import {Model} from 'objection/typings/objection'
+import {dbKnex} from '../db'
+
 Model.knex(dbKnex)
 
+import {Users} from "../users/users.model";
+import {News} from "../news/news.model";
+import {Movies} from "../movies/movies.model";
 
+export class Comments extends Model {
+    public id!: number
+    public news_id!: number
+    public movies_id!: number
+    public user_id!: number
+    public module_name!: string
+    public text!: string
+    public created_at!: Date | string;
+    public updated_at!: Date | string;
 
-class CommentsModel extends Model {
-    
+    user?: Users
+    news?: News[]
+    movies?: Movies[]
 
     static get tableName() {
         return 'comments';
@@ -17,14 +31,14 @@ class CommentsModel extends Model {
             required: ['module_name', 'news_id', 'movies_id', 'user_id', 'text'],
 
             properties: {
-                id: { type: 'integer' },
-                news_id: { type: 'integer' },
-                movies_id: { type: 'integer' },
-                user_id: { type: 'integer' },
-                module_name: { type: 'string', minLength: 1, maxLength: 40 },
-                text: { type: 'string', minLength: 1, maxLength: 1000 },
-                created_at: { type: 'string' },
-                updated_at: { type: 'string' }
+                id: {type: 'integer'},
+                news_id: {type: 'integer'},
+                movies_id: {type: 'integer'},
+                user_id: {type: 'integer'},
+                module_name: {type: 'string', minLength: 1, maxLength: 40},
+                text: {type: 'string', minLength: 1, maxLength: 1000},
+                created_at: {type: 'string'},
+                updated_at: {type: 'string'}
             }
         }
     }

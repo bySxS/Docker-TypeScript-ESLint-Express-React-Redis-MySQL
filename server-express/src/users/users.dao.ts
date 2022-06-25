@@ -1,19 +1,25 @@
-import { hashSync } from 'bcryptjs'
-import Logger, { IError } from '../logger';
-import { Users } from './users.model'
-import {IUsers} from "./users.service";
+import {hashSync} from 'bcryptjs'
+import Logger, {IError} from '../logger';
+import {Users} from './users.model'
+import {IMessage} from "../interface";
+import {IUserDao} from "./users.interface";
 
-export interface IMessage {
-    message: string
-}
 
-export class UsersDAO {
+class UsersDAO implements IUserDao {
+    private static instance: UsersDAO;
 
-    static async registration(nickname: string,
+    static getInstance(): UsersDAO {
+        if (!UsersDAO.instance) {
+            UsersDAO.instance = new UsersDAO();
+        }
+        return UsersDAO.instance;
+    }
+
+    async registration(nickname: string,
                               fullName: string | undefined,
                               email: string,
                               password: string,
-                              roles_id: number = 3): Promise<Promise<IMessage> | undefined> {
+                              roles_id: number = 3): Promise<IMessage> {
 
         try {
 
@@ -21,35 +27,61 @@ export class UsersDAO {
             const candidate = await Users.query()
                 .findOne('nickname', nickname)
                 .select('nickname')
-            if (candidate) {
-                return {message: "Пользователь с таким именем уже существует"}
+            if (candidate) return {
+                message: "Пользователь с таким именем уже существует"
             }
+
             const hashPassword = hashSync(password, 7);
 
-            if (roles_id > 0) {
-                await Users.query().insert({
-                    nickname,
-                    email,
-                    full_name: fullName,
-                    roles_id,
-                    password: hashPassword
-                })
-                return {message: `Пользователь ${nickname} успешно зарегистрирован`}
-            } else return {message: "Группы ${roles_id} - нет"}
+            if (roles_id === 0) return {
+                message: `Группы ${roles_id} - нет`
+            }
+
+            const result = await Users.query().insert({
+                nickname,
+                email,
+                full_name: fullName,
+                roles_id,
+                password: hashPassword
+            })
+            return {
+                result: result,
+                message: `Пользователь ${nickname} успешно зарегистрирован`
+            }
+
 
         } catch (error) {
             const err = error as IError
             Logger.error(`${err.message}`, {users_dao: 'registration'})
+            return {
+                message: `Ошибка регистрации`
+            }
         }
 
     }
 
-    static getUserByNickname(nickname: string) {
-        return Users.query().findOne('nickname', nickname)
+    async getUserByNickname(nickname: string): Promise<IMessage> {
+        try {
+
+            const result = await Users.query().findOne('nickname', nickname)
+            return {
+                result: result,
+                message: 'Пользователь получен'
+            }
+        } catch (e) {
+            return {message: 'Нет такого пользователя'}
+        }
+
+    }
+
+    getUsers(limit: number, page: number): Promise<IMessage> {
+        //return Promise.resolve(undefined);
     }
 
 
 }
 
+
+export default UsersDAO.getInstance();
 
 

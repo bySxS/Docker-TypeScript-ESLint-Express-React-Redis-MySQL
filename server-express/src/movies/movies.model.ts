@@ -2,9 +2,24 @@ import { Model }  from 'objection/typings/objection'
 import { dbKnex } from '../db'
 Model.knex(dbKnex)
 
-//MoviesModel
-class MoviesModel extends Model {
+import { Users } from "../users/users.model"
+import { CategoryMovies } from "../category/category.model"
+import { Comments } from "../comments/comments.model"
 
+//MoviesModel
+export class Movies extends Model {
+    public id!: number
+    public title!: string
+    public url!: string
+    public category_id!: number
+    public user_id!: number
+    public text!: string
+    public created_at!: Date | string;
+    public updated_at!: Date | string;
+
+    user?: Users
+    category?: CategoryMovies
+    comments?: Comments
 
     static get tableName() {
         return 'movies';
@@ -40,7 +55,7 @@ class MoviesModel extends Model {
             },
             category: {
                 relation: Model.HasManyRelation,
-                modelClass: Category_movies,
+                modelClass: CategoryMovies,
                 join: {
                     from: 'movies.category_id',
                     to: 'category_movies.id'

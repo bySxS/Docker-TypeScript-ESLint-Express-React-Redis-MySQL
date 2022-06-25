@@ -1,15 +1,16 @@
 import { Model }  from 'objection/typings/objection'
 import { dbKnex } from '../db'
-import { Roles } from '../roles/roles.model';
-// const Roles = require('./roles')
-// const Comments = require('./comments')
-// const News = require('./news')
-// const Movies = require('./movies')
-
 Model.knex(dbKnex)
 
+
+import { Roles } from '../roles/roles.model'
+import { Comments } from "../comments/comments.model"
+import { News } from "../news/news.model"
+import { Movies } from "../movies/movies.model"
+
+
 ///////////////users
-export class UsersModel extends Model {
+export class Users extends Model {
     public id!: number
     public nickname!: string
     public full_name!: string
@@ -19,6 +20,10 @@ export class UsersModel extends Model {
     public created_at!: Date | string;
     public updated_at!: Date | string;
 
+    comments?: Comments[]
+    news?: News[]
+    movies?: Movies[]
+    roles?: Roles[]
 
     static get tableName() {
         return 'users';
@@ -44,30 +49,30 @@ export class UsersModel extends Model {
 
     static get relationMappings() {
         return {
-            // comments: {
-            //     relation: Model.HasManyRelation,
-            //     modelClass: Comments,
-            //     join: {
-            //         from: 'users.id',
-            //         to: 'comments.user_id'
-            //     }
-            // },
-            // news: {
-            //     relation: Model.HasManyRelation,
-            //     modelClass: News,
-            //     join: {
-            //         from: 'users.id',
-            //         to: 'news.user_id'
-            //     }
-            // },
-            // movies: {
-            //     relation: Model.HasManyRelation,
-            //     modelClass: Movies,
-            //     join: {
-            //         from: 'users.id',
-            //         to: 'movies.user_id'
-            //     }
-            // },
+            comments: {
+                relation: Model.HasManyRelation,
+                modelClass: Comments,
+                join: {
+                    from: 'users.id',
+                    to: 'comments.user_id'
+                }
+            },
+            news: {
+                relation: Model.HasManyRelation,
+                modelClass: News,
+                join: {
+                    from: 'users.id',
+                    to: 'news.user_id'
+                }
+            },
+            movies: {
+                relation: Model.HasManyRelation,
+                modelClass: Movies,
+                join: {
+                    from: 'users.id',
+                    to: 'movies.user_id'
+                }
+            },
             roles: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Roles,

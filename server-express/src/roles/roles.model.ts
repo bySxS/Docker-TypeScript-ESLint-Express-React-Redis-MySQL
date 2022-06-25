@@ -1,8 +1,8 @@
 import { Model }  from 'objection/typings/objection'
 import { dbKnex } from '../db'
-import { Users } from '../users/users.model';
-
 Model.knex(dbKnex)
+
+import { Users } from '../users/users.model';
 
 /////////roles
 export class Roles extends Model {

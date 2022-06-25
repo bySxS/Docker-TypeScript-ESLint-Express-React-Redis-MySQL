@@ -2,11 +2,24 @@ import { Model }  from 'objection/typings/objection'
 import { dbKnex } from '../db'
 Model.knex(dbKnex)
 
-
+import { Users } from "../users/users.model";
+import { CategoryNews } from "../category/category.model";
+import { Comments } from "../comments/comments.model";
 
 //NewsModel
-class NewsModel extends Model {
+export class News extends Model {
+    public id!: number
+    public title!: string
+    public url!: string
+    public category_id!: number
+    public user_id!: number
+    public text!: string
+    public created_at!: Date | string;
+    public updated_at!: Date | string;
 
+    user?: Users
+    category?: CategoryNews
+    comments?: Comments
 
     static get tableName() {
         return 'news';
@@ -42,7 +55,7 @@ class NewsModel extends Model {
             },
             category: {
                 relation: Model.HasManyRelation,
-                modelClass: Category_news,
+                modelClass: CategoryNews,
                 join: {
                     from: 'news.category_id',
                     to: 'category_news.id'

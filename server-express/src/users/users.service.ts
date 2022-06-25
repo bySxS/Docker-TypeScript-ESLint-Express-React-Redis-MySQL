@@ -1,33 +1,52 @@
-import {IMessage, UsersDAO} from './users.dao'
+import UsersDAO from './users.dao'
 
-export interface IUsers {
-    id: number,
-    nickname: string,
-    full_name?: string,
-    roles_id?: number,
-    email: string,
-    password: string
-}
+import { IUsers, IUserService } from "./users.interface";
+import { IMessage } from "../interface";
 
-export class UsersService {
+
+class UsersService implements IUserService {
+    private static instance: UsersService;
+
+    static getInstance(): UsersService {
+        if (!UsersService.instance) {
+            UsersService.instance = new UsersService();
+        }
+        return UsersService.instance;
+    }
 
     //////////////////////////////////
-    static registration(Dto: IUsers): Promise<Promise<IMessage> | undefined> {
+    registration(Dto: IUsers): Promise<IMessage> {
         const { nickname, full_name, email, password } = Dto
         return UsersDAO.registration(nickname, full_name, email, password)
     }
 
     //////////////////////////////////
-    static getUserByNickname(Dto: IUsers) {
+    getUserByNickname(Dto: IUsers): Promise<IMessage> {
         const { nickname } = Dto
         return UsersDAO.getUserByNickname(nickname)
     }
+
+    // static deleteUserById(Dto: IUsers): Promise<IMessage> {
+    //    // return //Promise.resolve(undefined);
+    // }
+
+    getUsers(limit: number, page: number): Promise<IMessage> {
+       // return //Promise.resolve(undefined);
+    }
+
+    // static patchUserById(Dto: IUsers): Promise<IMessage> {
+    //   //  return //Promise.resolve(undefined);
+    // }
+    //
+    //
+    // static updateUserById(Dto: IUsers): Promise<IMessage> {
+    //    // return //Promise.resolve(undefined);
+    // }
 
     //////////////////////////////////
 
 
 
-
-
-
 }
+
+export default UsersService.getInstance();
