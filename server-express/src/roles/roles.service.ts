@@ -1,26 +1,34 @@
-import { RolesDao } from "./roles.dao";
-import {Roles} from "./roles.model";
+import RolesDao from "./roles.dao";
+import {IRoles, IRolesService} from "./roles.interface";
+import {IMessage} from "../interface";
 
-export interface IRoles {
-    id: number,
-    roles_id?: number,
-    name: string,
-    name_rus: string,
-}
 
-export class RolesService {
 
-    static AddRole(Dto: IRoles){
+class RolesService implements IRolesService {
+    private static instance: RolesService;
+
+    static getInstance(): RolesService { //singleton
+        if (!RolesService.instance) {
+            RolesService.instance = new RolesService();
+        }
+        return RolesService.instance;
+    }
+
+
+    AddRole(Dto: IRoles): Promise<IMessage> {
         const {name, name_rus} = Dto
         return RolesDao.AddRole(name, name_rus)
     }
 
-    static getRoleById(id: number){
+    getRoleById(Dto: IRoles): Promise<IMessage> {
+        const { id } = Dto
         return RolesDao.getRoleById(id)
     }
 
-    static getRoles() {
+    getRoles(): Promise<IMessage> {
         return RolesDao.getRoles()
     }
 
 }
+
+export default RolesService.getInstance();

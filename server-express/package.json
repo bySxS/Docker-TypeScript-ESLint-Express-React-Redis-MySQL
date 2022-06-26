@@ -24,9 +24,11 @@
     "typescript": "^4.7.4"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "dev": "ts-node-dev --respawn --transpile-only --files src/app.ts",
     "eslint": "npx eslint --fix src/*",
-    "lint": "npx eslint . --ext .ts"
+    "lint": "npx eslint . --ext src/*",
+    "migrate": "npx knex migrate:latest --knexfile src/db/knex.ts",
+    "seedadd": "npx knex seed:run --knexfile src/db/knex.ts"
   },
   "author": "sxs",
   "license": "ISC",

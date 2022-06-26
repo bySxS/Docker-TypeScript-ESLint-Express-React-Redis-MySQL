@@ -4,6 +4,7 @@ import IndexRoutes from './routes'
 import UsersRoutes from './users/users.routes'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import Logger from "./logger";
 dotenv.config()
 
 const app = express()
@@ -24,5 +25,5 @@ IndexRoutes(app)
 UsersRoutes(app)
 
 app.listen(PORT, () => {
-  console.log('Server started at PORT 3000')
+  Logger.info('Server started at PORT 3000')
 })

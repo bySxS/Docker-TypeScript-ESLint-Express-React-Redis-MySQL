@@ -1,14 +1,17 @@
 import {Request, Response, NextFunction} from 'express'
-import {JwtPayload, Secret, verify} from 'jsonwebtoken'
+import {Secret, verify} from 'jsonwebtoken'
 import dotenv from 'dotenv'
+import {IJwt} from "../users/users.interface";
+import Logger, {IError} from "../logger";
+import {IAuthRequest} from "../interface";
+
 dotenv.config()
 
-module.exports = function (roles: [string] | string) {
-    return function (req: Request, res: Response, next: NextFunction) {
+export const RoleMiddleware = (roles: string[] | string) => {
+    return function (req: IAuthRequest | Request, res: Response, next: NextFunction) {
         if (req.method === "OPTIONS") {
             next()
         }
-
         try {
             if (!req.headers.authorization) {
                 return res.status(403)
@@ -16,25 +19,29 @@ module.exports = function (roles: [string] | string) {
             }
             const token: string = req.headers.authorization.split(' ')[1] || '';
             const secret: Secret = process.env.JWT_ACCESS_SECRET || ''
-
-            if ((token === '')||(secret === '')) {
+            if ((token === '') || (secret === '')) {
                 return res.status(403)
                     .json({message: "Пользователь не авторизован"})
             }
 
-            const jwtPayload: JwtPayload | string = verify(token, secret);
+            const verifyUser = verify(token, secret) as IJwt
+            if ("user" in req) {
+                req.user = verifyUser
+            }
+            const jwtPayload = verifyUser;
 
-            if ((!jwtPayload) ||
-                (typeof jwtPayload === "string") ||
-                (!jwtPayload.roles)) {
+
+            if (!jwtPayload) {
                 return res.status(403)
                     .json({message: "Неверный ключ или токен"})
             }
 
             const userRoles: string = jwtPayload.roles
 
-            let needRoles: [...[string], ...[string]] | [string] = ['admin']//всегда даем права админу]
-            const useRoles: [string] = [userRoles]
+
+
+            let needRoles: string[] = ['admin']//всегда даем права админу]
+            const useRoles: string[] = [userRoles]
 
             if (typeof (roles) === "object") {
                 needRoles = [...needRoles, ...roles]
@@ -54,7 +61,8 @@ module.exports = function (roles: [string] | string) {
             }
             next();
         } catch (e) {
-            // console.log(e)
+            const err = e as IError
+            Logger.error(err.message, {middleware: 'RoleMiddleware'})
             return res.status(403)
                 .json({message: "Пользователь не авторизован"})
         }

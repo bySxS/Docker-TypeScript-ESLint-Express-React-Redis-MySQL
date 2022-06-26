@@ -1,14 +1,19 @@
 import { Request, Response } from 'express'
-import { RolesService } from "./roles.service";
-import Logger from "../logger";
+import RolesService from "./roles.service";
+import Logger, {IError} from "../logger";
 
-interface IError {
-    message: string
-}
+class RolesController {
+    private static instance: RolesController;
 
-export class RolesController {
+    static getInstance(): RolesController { //паттерн singleton одиночка
+        if (!RolesController.instance) {
+            RolesController.instance = new RolesController();
+        }
+        return RolesController.instance;
+    }
 
-    static async AddRole(req: Request, res: Response) {
+
+    async AddRole(req: Request, res: Response) {
         try {
             const result = await RolesService.AddRole(req.body)
             res.status(201).json(result)
@@ -20,3 +25,5 @@ export class RolesController {
     }
 
 }
+
+export default RolesController.getInstance();

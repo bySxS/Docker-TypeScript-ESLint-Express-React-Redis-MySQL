@@ -1,31 +1,36 @@
-import {Request, Response, NextFunction} from 'express'
-import {JwtPayload, Secret, verify} from 'jsonwebtoken'
+import {Response, NextFunction} from 'express'
+import {Secret, verify} from 'jsonwebtoken'
 import dotenv from 'dotenv'
-
+import {IAuthRequest} from "../interface";
+import {IJwt} from "../users/users.interface";
+import Logger, {IError} from "../logger";
 dotenv.config()
 
-export interface IGetUserAuthInfoRequest extends Request {
-    user: string | JwtPayload // or any other type
+
+
+export const AuthMiddleware = () => {
+    return function (req: IAuthRequest, res: Response, next: NextFunction) {
+        if (req.method === "OPTIONS") {
+            next()
+        }
+        try {
+            if (!req.headers.authorization) {
+                return res.status(403)
+                    .json({message: "Пользователь не авторизован"})
+            }
+            const token: string = req.headers.authorization.split(' ')[1] || '';
+            const secret: Secret = process.env.JWT_ACCESS_SECRET || ''
+            if ((token === '') || (secret === '')) {
+                return res.status(403)
+                    .json({message: "Пользователь не авторизован"})
+            }
+
+            req.user = verify(token, secret) as IJwt
+            next()
+        } catch (e) {
+            const err = e as IError
+            Logger.error(err.message, {middleware: 'AuthMiddleware'})
+            return res.status(403).json({message: "Пользователь не авторизован"})
+        }
+    }
 }
-
-module.exports = function (req: IGetUserAuthInfoRequest, res: Response, next: NextFunction) {
-    if (req.method === "OPTIONS") {
-        next()
-    }
-    try {
-        if (!req.headers.authorization) {
-            return res.status(403).json({message: "Пользователь не авторизован"})
-        }
-        const token: string = req.headers.authorization.split(' ')[1] || '';
-        const secret: Secret = process.env.JWT_ACCESS_SECRET || ''
-        if ((token === '') || (secret === '')) {
-            return res.status(403).json({message: "Пользователь не авторизован"})
-        }
-
-        req.user = verify(token, secret)
-        next()
-    } catch (e) {
-        //console.log(e)
-        return res.status(403).json({message: "Пользователь не авторизован"})
-    }
-};

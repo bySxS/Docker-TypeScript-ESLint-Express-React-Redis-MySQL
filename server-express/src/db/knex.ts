@@ -1,17 +1,40 @@
-import dotenv from 'dotenv'
-dotenv.config()
+interface IKnexConfig {
+    [key: string]: object;
+};
 
-const defaults = {
-    client: 'mysql',
-    connection: { //migrations
-        host: '127.0.0.1',
-        user: 'sxs',
-        password: '123456789s',
-        database: 'site-ts-test',
-        charset: 'utf8'
+export const knexConfig: IKnexConfig = {
+    test: {
+        client: 'mysql',
+        connection: { //migrations
+            host: '127.0.0.1',
+            user: 'sxs',
+            password: '123456789s',
+            database: 'site-ts-test',
+            charset: 'utf8',
+        }
+    },
+    development: {
+        client: 'mysql',
+        connection: { //migrations
+            host: '127.0.0.1',
+            user: 'sxs',
+            password: '123456789s',
+            database: 'site-ts-test',
+            charset: 'utf8',
+        }
+    },
+    production: {
+        client: 'mysql',
+        connection: { //migrations
+            host: '127.0.0.1',
+            user: 'sxs',
+            password: '123456789s',
+            database: 'site-ts-test',
+            charset: 'utf8',
+        }
     },
     migrations: {
-        directory: '../db/migrations',
+        //directory: '../db/migrations',
         tableName: 'knex_migrations'
     },
     seeds: {
@@ -21,30 +44,50 @@ const defaults = {
         min: 2,
         max: 5
     }
+
 }
 
-interface IKnexConfig {
-    [key: string]: object;
-};
-
-export const knexConfig: IKnexConfig = {
+module.exports = { //для migrate: make только с этим работает
     test: {
-        ...defaults,
+        client: 'mysql',
         connection: { //migrations
-            database: 'site-test',
-        },
-    },
-    development: {
-        ...defaults,
-        connection: { //migrations
-            database: 'site-dev',
-        },
-    },
-    production: {
-        ...defaults,
-        connection: { //migrations
-            database: 'site-prod',
+            host: '127.0.0.1',
+            user: 'sxs',
+            password: '123456789s',
+            database: 'site-ts-test',
+            charset: 'utf8',
         }
     },
+    development: {
+        client: 'mysql',
+        connection: { //migrations
+            host: '127.0.0.1',
+            user: 'sxs',
+            password: '123456789s',
+            database: 'site-ts-test',
+            charset: 'utf8',
+        }
+    },
+    production: {
+        client: 'mysql',
+        connection: { //migrations
+            host: '127.0.0.1',
+            user: 'sxs',
+            password: '123456789s',
+            database: 'site-ts-test',
+            charset: 'utf8',
+        }
+    },
+    migrations: {
+        //directory: '../db/migrations',
+        tableName: 'knex_migrations'
+    },
+    seeds: {
+        directory: '../db/seeds'
+    },
+    pool: {
+        min: 2,
+        max: 5
+    }
 
 }

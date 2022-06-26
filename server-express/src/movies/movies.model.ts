@@ -1,4 +1,4 @@
-import { Model }  from 'objection/typings/objection'
+import { Model }  from 'objection'
 import { dbKnex } from '../db'
 Model.knex(dbKnex)
 
