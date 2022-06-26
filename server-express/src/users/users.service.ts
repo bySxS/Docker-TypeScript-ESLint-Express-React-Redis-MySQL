@@ -24,12 +24,11 @@ class UsersService implements IUserService {
     return UsersDAO.getUserByNickname(nickname)
   }
 
-  getUsers (limit: number, page: number): Promise<IMessage> {
+  getUsers (limit: number = 10, page: number = 1): Promise<IMessage> {
     return UsersDAO.getUsers(limit, page)
   }
 
-  deleteUserById (Dto: IUsers): Promise<IMessage> {
-    const { id } = Dto
+  deleteUserById (id: number): Promise<IMessage> {
     return UsersDAO.deleteUserById(id)
   }
 

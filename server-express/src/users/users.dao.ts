@@ -3,6 +3,9 @@ import Logger, { IError } from '../logger'
 import { Users } from './users.model'
 import { IMessage } from '../interface'
 import { IUserDao } from './users.interface'
+import { cacheRedisDB } from '../cache'
+import { userQueueDB } from '../queue'
+import milliseconds from 'milliseconds'
 
 class UsersDAO implements IUserDao {
   // eslint-disable-next-line no-use-before-define
@@ -66,38 +69,57 @@ class UsersDAO implements IUserDao {
         message: 'Пользователь получен'
       }
     } catch (e) {
+      const err = e as IError
+      Logger.error(`${err.message}`, { users_dao: 'getUserByNickname' })
       return { message: 'Нет такого пользователя' }
     }
   }
 
-  async getUsers (limit: number, page: number): Promise<IMessage> {
+  async getUsers (limit: number = 10, page: number = 1): Promise<IMessage> {
     try {
       const result = await Users.query().limit(limit).offset(page)
       return { result, message: `Страница ${page} пользователей успешно загружена` }
     } catch (e) {
+      const err = e as IError
+      Logger.error(`${err.message}`, { users_dao: 'getUsers' })
       return { message: 'Пользователей не загружены' }
     }
   }
 
   async deleteUserById (id: number): Promise<IMessage> {
     try {
-      const result = await Users.query().deleteById(id)
-      return { result, message: `Пользователь с ID ${id} удалён!` }
+      const PayLoad = { id }
+      await userQueueDB.add('deleteUser', PayLoad, {
+        delay: milliseconds.seconds(15)
+      })
+      // const result = await Users.query().deleteById(id)
+      return { message: `Пользователь с ID ${id} будет удалён через минуту!` }
     } catch (e) {
+      const err = e as IError
+      Logger.error(`${err.message}`, { users_dao: 'deleteUserById' })
       return { message: `Пользователь с ID ${id} не был удалён, произошла ошибка` }
     }
   }
 
   async getUserById (id: number): Promise<IMessage> {
+    let user
     try {
-      const user = await Users.query().findById(id)
+      user = await cacheRedisDB.get('user:' + id)
       if (user) {
-        return { result: user, message: `Пользователь с ID ${id} загружен!` }
+        user = JSON.parse(user)
       } else {
-        return { message: `Пользователя с ID ${id} не найдено!` }
+        user = await Users.query().findById(id)
+        if (!user) {
+          return { message: `Пользователя с ID ${id} не найдено!` }
+        }
+        await cacheRedisDB.set('user:' + id, JSON.stringify(user))
       }
+      await cacheRedisDB.expire('user:' + id, 1800) // удалять через пол часа
+      return { result: user, message: `Пользователь с ID ${id} загружен!` }
     } catch (e) {
-      return { message: `Пользователь с ID ${id} не был удалён, произошла ошибка` }
+      const err = e as IError
+      Logger.error(`${err.message}`, { users_dao: 'getUserById' })
+      return { message: `Пользователь с ID ${id} не был получен, произошла ошибка` }
     }
   }
 
@@ -118,6 +140,8 @@ class UsersDAO implements IUserDao {
         })
       return { result: changeUser, message: `Данные пользователя с ID ${id} изменены` }
     } catch (e) {
+      const err = e as IError
+      Logger.error(`${err.message}`, { users_dao: 'updateUserById' })
       return { message: `Ошибка изменения данные пользователя с ID ${id}` }
     }
   }
@@ -128,6 +152,8 @@ class UsersDAO implements IUserDao {
         .where('nickname', 'like', `%${nickname}%`)
       return { result: users, message: 'Поиск прошёл успешно' }
     } catch (e) {
+      const err = e as IError
+      Logger.error(`${err.message}`, { users_dao: 'searchUsers' })
       return { message: 'Поиск прошёл не успешно' }
     }
   }

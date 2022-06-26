@@ -2,7 +2,7 @@ interface IKnexConfig {
     [key: string]: object;
 }
 
-export const knexConfig: IKnexConfig = {
+const knexConfig: IKnexConfig = {
   test: {
     client: 'mysql',
     connection: { // migrations
@@ -46,6 +46,8 @@ export const knexConfig: IKnexConfig = {
   }
 
 }
+
+export default knexConfig
 
 module.exports = { // для migrate: make только с этим работает
   test: {

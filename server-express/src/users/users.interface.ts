@@ -22,7 +22,7 @@ export interface IUserService {
     getUserById: (id: number) => Promise<IMessage>,
     getUsers: (limit: number, page: number) => Promise<IMessage>,
     updateUserById: (id: number, bodyDto: IUsers, rolesIdAuthUser: number) => Promise<IMessage>,
-    deleteUserById: (Dto: IUsers) => Promise<IMessage>,
+    deleteUserById: (id: number) => Promise<IMessage>,
     searchUsers: (nickname: string, limit: number, page: number) => Promise<IMessage>,
 }
 

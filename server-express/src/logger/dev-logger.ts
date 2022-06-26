@@ -15,7 +15,7 @@ export function buildDevLogger () {
     ),
     transports: [
       new transports.Console({
-
+        format: format.colorize()
       })
       // new transports.Http({ host: 'localhost', port: 3000, path: '/log', format: format.json() } ),
       // new transports.File({ filename: 'logger/log/error.log', level: 'error' }),

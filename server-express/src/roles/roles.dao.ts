@@ -32,7 +32,6 @@ class RolesDao implements IRolesDao {
   async getRoleById (id: number): Promise<IMessage> {
     try {
       const result = await Roles.query().findById(id)
-
       return {
         result,
         message: `Группа по ID ${id} получена`

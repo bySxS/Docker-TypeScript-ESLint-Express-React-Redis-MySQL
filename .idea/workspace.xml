@@ -3,39 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="a9a36626-1326-4ad4-a759-06d65a953d18" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server-express/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server-express/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server-express/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/category/category.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/category/category.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/comments/comments.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/comments/comments.model.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/db/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/db/knex.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/knex.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/db/migrations/20220618232106_roles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/migrations/20220618232106_roles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/db/migrations/20220618232148_users.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/migrations/20220618232148_users.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/db/migrations/20220618232212_category_news.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/migrations/20220618232212_category_news.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/db/migrations/20220618232223_news.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/migrations/20220618232223_news.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/db/migrations/20220618232226_category_movies.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/migrations/20220618232226_category_movies.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/db/migrations/20220618232231_movies.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/migrations/20220618232231_movies.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/db/migrations/20220618232239_comments.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/migrations/20220618232239_comments.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/db/seeds/01_roles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/seeds/01_roles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/db/seeds/02_users.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/seeds/02_users.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/db/seeds/03_category.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/seeds/03_category.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/db/seeds/04_category_movies.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/seeds/04_category_movies.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/logger/dev-logger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/logger/dev-logger.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/logger/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/logger/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/logger/prod-logger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/logger/prod-logger.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/middleware/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/middleware/auth.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/middleware/role.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/middleware/role.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/movies/movies.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/movies/movies.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/news/news.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/news/news.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/roles/roles.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/roles/roles.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/roles/roles.dao.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/roles/roles.dao.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/roles/roles.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/roles/roles.interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/roles/roles.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/roles/roles.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/roles/roles.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/roles/roles.routes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/roles/roles.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/roles/roles.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server-express/src/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/routes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/users/users.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/users/users.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/users/users.dao.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/users/users.dao.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/users/users.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/users/users.interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/src/users/users.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/users/users.model.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/users/users.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/users/users.routes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/users/users.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/users/users.service.ts" afterDir="false" />
     </list>
@@ -61,6 +43,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2AyC9gaBD6b3PdPknanY4QcwNFn" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -75,6 +60,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.sourceCode.JavaScript",
     "ts.external.directory.path": "C:\\Users\\Пользователь\\WebstormProjects\\ExtrumsTest\\TypeScript-ESLint\\server-express\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
@@ -98,7 +84,7 @@
       <workItem from="1655972289172" duration="5618000" />
       <workItem from="1655984673296" duration="36855000" />
       <workItem from="1656080890281" duration="29990000" />
-      <workItem from="1656252616756" duration="2048000" />
+      <workItem from="1656252616756" duration="17764000" />
     </task>
     <servers />
   </component>

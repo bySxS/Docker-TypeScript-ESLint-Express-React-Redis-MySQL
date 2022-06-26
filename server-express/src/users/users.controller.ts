@@ -58,12 +58,12 @@ class UsersController {
             const user = await UsersService.getUserByNickname(req.body)
             if (!user.result) {
                 return res.status(400)
-                    .json({message: `Пользователь ${nickname} не найден`})
+                    .json(user.message)
             }
             const roles = await RolesService.getRoleById(user.result.roles_id)
-            if (!roles) {
+            if (!roles.result) {
                 return res.status(400)
-                    .json({message: `Пользователь ${nickname} не имеет группы`})
+                    .json(roles.message)
             }
             const validPassword = compareSync(password, user.result.password)
             if (!validPassword) {
@@ -82,10 +82,8 @@ class UsersController {
             return res.status(400).json({message: 'Login error'})
         }
     } /////////////////login
-
-    updateUser() {
-        return async function (req: Request, res: Response) {
-
+    
+    async updateUser(req: Request, res: Response) {
             try {
                 if (!req.params.id) {
                     return res.status(500).json('Не указан Id пользователя')
@@ -99,15 +97,14 @@ class UsersController {
                 Logger.error(err.message, {controller_users: 'updateUser'})
                 return res.status(500).json('updateUser error')
             }
-
-        }
     }
+    
 
     async getUsers(req: Request, res: Response) {
 
         try {
-            const limit: number = Number(req.query.limit)
-            const offset: number = Number(req.query.offset)
+            const limit: number = Number(req.query.limit || 10)
+            const offset: number = Number(req.query.offset || 1)
             const listUsers = await UsersService.getUsers(limit, offset)
             return res.status(200).json(listUsers)
         } catch (error) {
@@ -125,11 +122,26 @@ class UsersController {
             }
             const id = Number(req.params.id)
             const User = await UsersService.getUserById(id)
-            return res.status(200).json(User)
+            return res.status(200).send(User)
         } catch (e) {
             const err = e as IError
             Logger.error(err.message, {controller_users: 'getUserById'})
-            return res.status(500).json('что-то пошло не так!')
+            return res.status(500).json('getUserById error')
+        }
+    }
+    
+    async deleteUserById(req: Request, res: Response) {
+        try {
+            if (!req.params.id) {
+                return res.status(500).json('Не указан Id пользователя')
+            }
+            const id = Number(req.params.id)
+            const User = await UsersService.deleteUserById(id)
+            return res.status(200).send(User)
+        } catch (e) {
+            const err = e as IError
+            Logger.error(err.message, {controller_users: 'deleteUserById'})
+            return res.status(500).json('deleteUserById error')
         }
     }
 
@@ -143,7 +155,7 @@ class UsersController {
             const listUsers = await UsersService.searchUsers(nickname, limit, offset)
             //const end = new Date().getTime();
             //logger.info(`время выполнения - ${end - start}ms`, {controller_users: 'searchUsers'})
-            return res.status(200).json(listUsers)
+            return res.status(200).send(listUsers)
         } catch (e) {
             const err = e as IError
             Logger.error(err.message, {controller_users: 'searchUsers'})

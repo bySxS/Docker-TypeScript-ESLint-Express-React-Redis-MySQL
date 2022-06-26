@@ -9,7 +9,7 @@ export interface IRoles {
 
 export interface IRolesService {
     AddRole: (Dto: IRoles) => Promise<IMessage>,
-    getRoleById: (Dto: IRoles) => Promise<IMessage>,
+    getRoleById: (id: number) => Promise<IMessage>,
     getRoles: () => Promise<IMessage>,
 }
 

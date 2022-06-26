@@ -26,7 +26,7 @@ export const RoleMiddleware = (roles: string[] | string) => {
       const verifyUser = verify(token, secret) as IJwt
 
       req.user = verifyUser
-
+      
       const jwtPayload = verifyUser
 
       if (!jwtPayload) {
@@ -58,7 +58,7 @@ export const RoleMiddleware = (roles: string[] | string) => {
       next()
     } catch (e) {
       const err = e as IError
-      Logger.error(err.message, { middleware: 'RoleMiddleware' })
+      Logger.error(err.message , { middleware: 'RoleMiddleware' })
       return res.status(403)
         .json({ message: 'Пользователь не авторизован' })
     }

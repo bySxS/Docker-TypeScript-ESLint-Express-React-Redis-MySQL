@@ -18,8 +18,7 @@ class RolesService implements IRolesService {
     return RolesDao.AddRole(name, nameRus)
   }
 
-  getRoleById (Dto: IRoles): Promise<IMessage> {
-    const { id } = Dto
+  getRoleById (id: number): Promise<IMessage> {
     return RolesDao.getRoleById(id)
   }
 
