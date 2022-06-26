@@ -5,7 +5,7 @@ import UsersRoutes from './users/users.routes'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
-import Logger from "./logger"
+import Logger from './logger'
 dotenv.config()
 
 const app = express()

@@ -1,34 +1,31 @@
-import RolesDao from "./roles.dao";
-import {IRoles, IRolesService} from "./roles.interface";
-import {IMessage} from "../interface";
-
-
+import RolesDao from './roles.dao'
+import { IRoles, IRolesService } from './roles.interface'
+import { IMessage } from '../interface'
 
 class RolesService implements IRolesService {
-    private static instance: RolesService;
+  // eslint-disable-next-line no-use-before-define
+  private static instance: RolesService
 
-    static getInstance(): RolesService { //singleton
-        if (!RolesService.instance) {
-            RolesService.instance = new RolesService();
-        }
-        return RolesService.instance;
+  static getInstance (): RolesService { // singleton
+    if (!RolesService.instance) {
+      RolesService.instance = new RolesService()
     }
+    return RolesService.instance
+  }
 
+  AddRole (Dto: IRoles): Promise<IMessage> {
+    const { name, nameRus } = Dto
+    return RolesDao.AddRole(name, nameRus)
+  }
 
-    AddRole(Dto: IRoles): Promise<IMessage> {
-        const {name, name_rus} = Dto
-        return RolesDao.AddRole(name, name_rus)
-    }
+  getRoleById (Dto: IRoles): Promise<IMessage> {
+    const { id } = Dto
+    return RolesDao.getRoleById(id)
+  }
 
-    getRoleById(Dto: IRoles): Promise<IMessage> {
-        const { id } = Dto
-        return RolesDao.getRoleById(id)
-    }
-
-    getRoles(): Promise<IMessage> {
-        return RolesDao.getRoles()
-    }
-
+  getRoles (): Promise<IMessage> {
+    return RolesDao.getRoles()
+  }
 }
 
-export default RolesService.getInstance();
+export default RolesService.getInstance()

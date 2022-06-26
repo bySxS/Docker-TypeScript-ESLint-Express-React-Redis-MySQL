@@ -1,22 +1,22 @@
-import { buildDevLogger } from "./dev-logger";
-import { buildProdLogger } from "./prod-logger";
-import { Logger } from "winston";
+import { buildDevLogger } from './dev-logger'
+import { buildProdLogger } from './prod-logger'
+import { Logger } from 'winston'
 import dotenv from 'dotenv'
 dotenv.config()
 
-let Logger: Logger
+let logger: Logger
 const environment: string = process.env.NODE_ENV || 'development'
 if (environment === 'development') {
-    Logger = buildDevLogger();
+  logger = buildDevLogger()
 } else {
-    Logger = buildProdLogger();
+  logger = buildProdLogger()
 }
 
 export interface IError {
     message: string
 }
 
-export default Logger;
+export default logger
 
 // logger.info('text info', { meta: 1 });
 // logger.warn('text warn');

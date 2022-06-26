@@ -1,15 +1,15 @@
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
-import UsersService from "./users.service"
+import UsersService from './users.service'
 import { Secret, sign } from 'jsonwebtoken'
 import { compareSync } from 'bcryptjs'
-import RolesService from "../roles/roles.service";
-import Logger, { IError } from "../logger";
-import { IJwt } from "./users.interface";
+import RolesService from '../roles/roles.service'
+import Logger, { IError } from '../logger'
+import { IJwt } from './users.interface'
 
-function generateAccessToken(id: number, nickname: string, roles: string, roles_id: number): string {
+function generateAccessToken(id: number, nickname: string, roles: string, rolesId: number): string {
     const payload: IJwt = {
-        roles_id,
+        roles_id: rolesId,
         roles,
         id,
         nickname

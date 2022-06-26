@@ -1,10 +1,10 @@
-import {IMessage} from "../interface";
+import { IMessage } from '../interface'
 
 export interface IRoles {
     id: number,
-    roles_id?: number,
+    rolesId?: number,
     name: string,
-    name_rus: string,
+    nameRus: string,
 }
 
 export interface IRolesService {
