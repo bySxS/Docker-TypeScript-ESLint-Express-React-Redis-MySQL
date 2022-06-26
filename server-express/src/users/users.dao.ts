@@ -2,7 +2,7 @@ import {hashSync} from 'bcryptjs'
 import Logger, {IError} from '../logger';
 import {Users} from './users.model'
 import {IMessage} from "../interface";
-import {IUserDao, IUsers} from "./users.interface";
+import {IUserDao} from "./users.interface";
 
 
 class UsersDAO implements IUserDao {

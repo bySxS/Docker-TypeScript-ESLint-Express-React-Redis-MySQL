@@ -17,6 +17,12 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/server-express/src/users/users.controller.ts" root0="SKIP_INSPECTION" />
   </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
   <component name="ProjectId" id="2AyC9gaBD6b3PdPknanY4QcwNFn" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -28,7 +34,17 @@
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="js.last.introduce.type" value="CONST" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
     <property name="ts.external.directory.path" value="C:\Users\Пользователь\WebstormProjects\ExtrumsTest\TypeScript-ESLint\server-express\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -49,7 +65,7 @@
       <updated>1655972288134</updated>
       <workItem from="1655972289172" duration="5618000" />
       <workItem from="1655984673296" duration="36855000" />
-      <workItem from="1656080890281" duration="26702000" />
+      <workItem from="1656080890281" duration="29990000" />
     </task>
     <servers />
   </component>
@@ -61,6 +77,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="1198" y="240" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1656197413645" />
+    <state x="894" y="169" key="SettingsEditor" timestamp="1656251462305">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="894" y="169" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1656251462305" />
     <state x="1049" y="247" key="run.anything.popup" timestamp="1656071185756">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>

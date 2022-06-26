@@ -3,12 +3,11 @@ import {Secret, verify} from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import {IJwt} from "../users/users.interface";
 import Logger, {IError} from "../logger";
-import {IAuthRequest} from "../interface";
 
 dotenv.config()
 
 export const RoleMiddleware = (roles: string[] | string) => {
-    return function (req: IAuthRequest | Request, res: Response, next: NextFunction) {
+    return function (req: Request, res: Response, next: NextFunction) {
         if (req.method === "OPTIONS") {
             next()
         }
@@ -25,9 +24,10 @@ export const RoleMiddleware = (roles: string[] | string) => {
             }
 
             const verifyUser = verify(token, secret) as IJwt
-            if ("user" in req) {
-                req.user = verifyUser
-            }
+
+            req.user = verifyUser
+
+
             const jwtPayload = verifyUser;
 
 

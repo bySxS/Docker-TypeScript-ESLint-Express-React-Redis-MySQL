@@ -1,12 +1,11 @@
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
-import UsersService  from "./users.service"
+import UsersService from "./users.service"
 import { Secret, sign } from 'jsonwebtoken'
 import { compareSync } from 'bcryptjs'
 import RolesService from "../roles/roles.service";
-import Logger, {IError} from "../logger";
-import {IJwt} from "./users.interface";
-import { IAuthRequest } from '../interface'
+import Logger, { IError } from "../logger";
+import { IJwt } from "./users.interface";
 
 function generateAccessToken(id: number, nickname: string, roles: string, roles_id: number): string {
     const payload: IJwt = {
@@ -57,7 +56,7 @@ class UsersController {
             let nickname: string
             ({password, nickname} = req.body)
             const user = await UsersService.getUserByNickname(req.body)
-             if (!user.result) {
+            if (!user.result) {
                 return res.status(400)
                     .json({message: `Пользователь ${nickname} не найден`})
             }
@@ -84,8 +83,8 @@ class UsersController {
         }
     } /////////////////login
 
-     updateUser() {
-        return async function (req: IAuthRequest, res: Response) {
+    updateUser() {
+        return async function (req: Request, res: Response) {
 
             try {
                 if (!req.params.id) {
@@ -151,11 +150,6 @@ class UsersController {
             return res.status(500).json('что-то пошло не так!')
         }
     }
-
-
-
-
-
 
 
 }

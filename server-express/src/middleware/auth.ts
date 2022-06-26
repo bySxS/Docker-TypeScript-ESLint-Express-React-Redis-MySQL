@@ -1,15 +1,13 @@
-import {Response, NextFunction} from 'express'
+import {Request, Response, NextFunction} from 'express'
 import {Secret, verify} from 'jsonwebtoken'
 import dotenv from 'dotenv'
-import {IAuthRequest} from "../interface";
 import {IJwt} from "../users/users.interface";
 import Logger, {IError} from "../logger";
 dotenv.config()
 
 
 
-export const AuthMiddleware = () => {
-    return function (req: IAuthRequest, res: Response, next: NextFunction) {
+export const AuthMiddleware = (req: Request, res: Response, next: NextFunction) => {
         if (req.method === "OPTIONS") {
             next()
         }
@@ -32,5 +30,4 @@ export const AuthMiddleware = () => {
             Logger.error(err.message, {middleware: 'AuthMiddleware'})
             return res.status(403).json({message: "Пользователь не авторизован"})
         }
-    }
 }

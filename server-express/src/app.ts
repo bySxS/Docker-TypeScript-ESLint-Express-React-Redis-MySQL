@@ -3,8 +3,9 @@ import helmet from 'helmet'
 import IndexRoutes from './routes'
 import UsersRoutes from './users/users.routes'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
-import Logger from "./logger";
+import Logger from "./logger"
 dotenv.config()
 
 const app = express()
@@ -18,6 +19,7 @@ const corsSetting = function (req: Request, res: Response, next: NextFunction) {
 
 app.use(helmet())
 app.use(express.json())
+app.use(cookieParser())
 app.use(cors(corsOptions))
 app.use(corsSetting)
 app.use(express.urlencoded({ extended: true }))
