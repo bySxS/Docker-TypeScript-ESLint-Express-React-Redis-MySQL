@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  server_express:
+    build:
+      context: ./server-express
+    ports:
+      - "3000:3000"
+  nginx:
+    restart: always
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+
+
+networks:
+  default:
+    name: net

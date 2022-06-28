@@ -1,8 +1,11 @@
 import logger, { IError } from '../logger'
 import Queue from 'bull'
 import { Users } from '../users/users.model'
+import dotenv from 'dotenv'
+dotenv.config()
 
-export const userQueueDB = new Queue('user-db-queue', 'redis://127.0.0.1:6379')// db0 redis
+const REDIS_URL: string = process.env.REDIS_QUEUE_URL || 'redis://localhost:6379'
+export const userQueueDB = new Queue('user-db-queue', REDIS_URL)// db0 redis
 
 // userQueueDB.process('clearCache', async (job, done) => {
 //

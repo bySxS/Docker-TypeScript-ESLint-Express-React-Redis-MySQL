@@ -5,11 +5,11 @@ import UsersRoutes from './users/users.routes'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
-import logger from './logger'
 dotenv.config()
+import logger from './logger'
 
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 const corsOptions = { origin: '*', optionsSuccessStatus: 200 }
 const corsSetting = function (req: Request, res: Response, next: NextFunction) {

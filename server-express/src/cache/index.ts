@@ -1,8 +1,14 @@
 import { createClient } from 'redis'
 import { promisifyAll } from 'bluebird'
 import logger, { IError } from '../logger'
+import dotenv from 'dotenv'
+dotenv.config()
 
-const client = createClient({ database: 1 })// db1 redis
+const REDIS_URL: string = process.env.REDIS_CACHE_URL || 'redis://localhost:6379'
+const client = createClient({
+  url: REDIS_URL,
+  database: 1
+})// db1 redis
 client.connect()
   .then(() => {
     logger.info('Redis connected')
