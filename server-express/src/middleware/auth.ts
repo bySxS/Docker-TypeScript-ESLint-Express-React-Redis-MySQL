@@ -1,9 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { Secret, verify } from 'jsonwebtoken'
-import dotenv from 'dotenv'
 import { IJwt } from '../users/users.interface'
 import Logger, { IError } from '../logger'
-dotenv.config()
 
 export const AuthMiddleware = (req: Request, res: Response, next: NextFunction) => {
   if (req.method === 'OPTIONS') {

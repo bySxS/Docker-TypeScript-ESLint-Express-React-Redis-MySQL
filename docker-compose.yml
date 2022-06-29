@@ -1,12 +1,12 @@
 version: '3.9'
 
 services:
-  redis:
-    image: redis:alpine
-    restart: always
-    ports:
-      - "6379:6379"
-    command: redis-server --daemonize yes --save 20 1 --loglevel warning
+#  redis:
+#    image: redis:alpine
+#    restart: always
+#    ports:
+#      - "6379:6379"
+#    command: redis-server --daemonize yes --save 20 1 --loglevel warning
   server_express:
     build:
       context: ./server-express
@@ -18,12 +18,14 @@ services:
 #         memory: '50M'
       restart_policy:
         condition: on-failure
-  nginx:
-    restart: always
-    build:
-      context: ./nginx-reverseproxy
-    ports:
-      - "80:80"
+    command: sh -c 'npm run migrate && npm run seedAdd'
+    working_dir: /usr/src/app
+#  nginx:
+#    restart: always
+#    build:
+#      context: ./nginx-reverseProxy
+#    ports:
+#      - "80:80"
 
 networks:
   default:

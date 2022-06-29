@@ -4,7 +4,7 @@ import os from 'os'
 
 function IndexRoutes (app: Express) {
   app.get('/', (req: Request, res: Response) => {
-    return res.status(200).send('Hello World this GET , host:' + os.hostname())
+    return res.status(200).send('Hello World this GET , host: ' + os.hostname())
   })
 
   app.post('/', (req: Request, res: Response) => {

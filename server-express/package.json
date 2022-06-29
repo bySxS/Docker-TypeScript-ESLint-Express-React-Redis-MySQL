@@ -30,7 +30,7 @@
     "eslint": "npx eslint --fix src/*",
     "lint": "npx eslint . --ext src/*",
     "migrate": "npx knex migrate:latest --knexfile src/db/knex.ts",
-    "seedadd": "npx knex seed:run --knexfile src/db/knex.ts"
+    "seedAdd": "npx knex seed:run --knexfile src/db/knex.ts"
   },
   "author": "sxs",
   "license": "ISC",
@@ -54,6 +54,7 @@
     "mysql": "^2.18.1",
     "objection": "^3.0.1",
     "os": "^0.1.2",
+    "path": "^0.12.7",
     "redis": "^4.1.0",
     "winston": "^3.8.0"
   }

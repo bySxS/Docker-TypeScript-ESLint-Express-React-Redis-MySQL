@@ -1,8 +1,6 @@
 import logger, { IError } from '../logger'
 import Queue from 'bull'
 import { Users } from '../users/users.model'
-import dotenv from 'dotenv'
-dotenv.config()
 
 const REDIS_HOST: string = process.env.REDIS_QUEUE_HOST || 'localhost'
 const REDIS_PORT: number = Number(process.env.REDIS_QUEUE_PORT) || 6379

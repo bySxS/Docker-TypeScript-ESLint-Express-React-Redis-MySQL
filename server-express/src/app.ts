@@ -7,7 +7,11 @@ import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import logger from './logger'
 import os from 'os'
-dotenv.config()
+// import path from 'path'
+dotenv.config({
+  debug: true,
+  override: true
+})
 
 const app = express()
 const PORT = process.env.PORT

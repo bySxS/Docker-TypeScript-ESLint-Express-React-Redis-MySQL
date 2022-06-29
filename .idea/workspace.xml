@@ -4,16 +4,22 @@
     <list default="true" id="a9a36626-1326-4ad4-a759-06d65a953d18" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx-reverseproxy/default.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx-reverseproxy/default.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx-reverseproxy/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/nginx-reverseProxy/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx-reverseproxy/default.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx-reverseProxy/default.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/.env" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/node_modules/.package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/app.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/cache/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/cache/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server-express/src/db/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server-express/src/db/knex.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/knex.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server-express/src/logger/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/logger/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server-express/src/middleware/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/middleware/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server-express/src/middleware/role.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/middleware/role.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/queue/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/queue/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server-express/src/users/users.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/users/users.routes.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,14 +55,14 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Project/TypeScript-ESLint&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Project/Docker-TypeScript-ESLint-Express-React-Redis-MySQL&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.JavaScript&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Project\\TypeScript-ESLint\\server-express\\node_modules\\typescript\\lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Project\\Docker-TypeScript-ESLint-Express-React-Redis-MySQL\\server-express\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -83,6 +89,9 @@
       <workItem from="1656430814861" duration="5322000" />
       <workItem from="1656452509562" duration="12184000" />
       <workItem from="1656497001332" duration="3872000" />
+      <workItem from="1656509820027" duration="2741000" />
+      <workItem from="1656515908102" duration="376000" />
+      <workItem from="1656516302855" duration="4709000" />
     </task>
     <servers />
   </component>

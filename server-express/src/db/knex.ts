@@ -1,17 +1,21 @@
-import dotenv from 'dotenv'
-dotenv.config()
-
+import logger from '../logger'
 
 interface IKnexConfig {
     [key: string]: object;
 }
 
+const host: string = process.env.MYSQL_HOST || 'mysql'
+const port: string = process.env.MYSQL_PORT || '3306'
+const user: string = process.env.MYSQL_USER || 'sxs'
+const password: string = process.env.MYSQL_PASS || '123456789s'
+
 const defaultConf = {
   client: 'mysql',
   connection: { // migrations
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASS,
+    host,
+    port,
+    user,
+    password,
     database: 'site-ts-test',
     charset: 'utf8'
   }
@@ -32,7 +36,7 @@ const knexConfig: IKnexConfig = {
   },
   production: {
     ...defaultConf,
-    connection: { // migrations
+    connection: {
       database: 'site-ts-test'
     }
   },
@@ -46,6 +50,14 @@ const knexConfig: IKnexConfig = {
   pool: {
     min: 2,
     max: 5
+  },
+  log: {
+    error (message: string) {
+      logger.error('knex mysql error: ' + message, { knex: 'error' })
+    },
+    debug (message: string) {
+      logger.info('knex mysql debug: ' + message, { knex: 'debug' })
+    }
   }
 
 }
@@ -56,9 +68,10 @@ module.exports = { // для migrate: make только с этим работа
   test: {
     client: 'mysql',
     connection: { // migrations
-      host: '127.0.0.1',
-      user: 'sxs',
-      password: '123456789s',
+      host,
+      port,
+      user,
+      password,
       database: 'site-ts-test',
       charset: 'utf8'
     }
@@ -66,9 +79,10 @@ module.exports = { // для migrate: make только с этим работа
   development: {
     client: 'mysql',
     connection: { // migrations
-      host: '127.0.0.1',
-      user: 'sxs',
-      password: '123456789s',
+      host,
+      port,
+      user,
+      password,
       database: 'site-ts-test',
       charset: 'utf8'
     }
@@ -76,9 +90,10 @@ module.exports = { // для migrate: make только с этим работа
   production: {
     client: 'mysql',
     connection: { // migrations
-      host: '127.0.0.1',
-      user: 'sxs',
-      password: '123456789s',
+      host,
+      port,
+      user,
+      password,
       database: 'site-ts-test',
       charset: 'utf8'
     }
@@ -93,6 +108,14 @@ module.exports = { // для migrate: make только с этим работа
   pool: {
     min: 2,
     max: 5
+  },
+  log: {
+    error (message: string) {
+      logger.error('knex mysql error: ' + message, { knex: 'error' })
+    },
+    debug (message: string) {
+      logger.info('knex mysql debug: ' + message, { knex: 'debug' })
+    }
   }
 
 }

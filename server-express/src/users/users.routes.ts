@@ -18,9 +18,9 @@ function UsersRoutes (app: Express) {
       ], UsersController.registration)
 
     app.post('/login', UsersController.login)
-    app.get('/users', RoleMiddleware(['user', 'admin']), UsersController.getUsers)
+    app.get('/users', UsersController.getUsers)
     app.get('/users/:id', AuthMiddleware, UsersController.getUserById)
-    app.delete('/del_users/:id', RoleMiddleware('admin'), UsersController.deleteUserById)
+    app.delete('/del_users/:id', RoleMiddleware(['admin']), UsersController.deleteUserById)
     app.put('/user_update/:id', AuthMiddleware, UsersController.updateUser)
     app.get('/search_users', AuthMiddleware, UsersController.searchUsers)
   } catch (e) {
