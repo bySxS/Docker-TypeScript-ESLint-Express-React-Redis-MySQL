@@ -4,10 +4,9 @@
     <list default="true" id="a9a36626-1326-4ad4-a759-06d65a953d18" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/.env" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx-reverseProxy/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx-reverseProxy/default.conf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-express/production.env" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/production.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/app.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/cache/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/cache/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-express/src/db/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server-express/src/db/index.ts" afterDir="false" />
@@ -88,7 +87,8 @@
       <workItem from="1656509820027" duration="2741000" />
       <workItem from="1656515908102" duration="376000" />
       <workItem from="1656516302855" duration="5425000" />
-      <workItem from="1656524702507" duration="5237000" />
+      <workItem from="1656524702507" duration="7114000" />
+      <workItem from="1656539792503" duration="1791000" />
     </task>
     <servers />
   </component>

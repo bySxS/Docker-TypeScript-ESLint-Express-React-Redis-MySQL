@@ -1,3 +1,10 @@
+/* eslint-disable import/first */
+import { config } from 'dotenv'
+config({
+  debug: true,
+  override: true
+  // path: path.join(__dirname, env + '.env')
+})
 import express, { Request, Response, NextFunction } from 'express'
 import helmet from 'helmet'
 import IndexRoutes from './routes'
@@ -6,14 +13,8 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import logger from './logger'
 import os from 'os'
-import dotenv from 'dotenv'
 // import path from 'path'
 // const env: string = process.env.NODE_ENV || 'production'
-dotenv.config({
-  debug: true,
-  override: true
-  // path: path.join(__dirname, env + '.env')
-})
 
 const app = express()
 const PORT = process.env.PORT

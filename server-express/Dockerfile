@@ -17,7 +17,7 @@ COPY production.env ./src/
 COPY production.env .env
 COPY tsconfig.json ./
 COPY .eslintrc.json ./
-RUN ["npm", "install", "-g", "npm@latest"]
+#RUN ["npm", "install", "-g", "npm@latest"]
 RUN ["npm", "install"]
 
 CMD ["npm", "run", "prod"]

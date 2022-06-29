@@ -27,7 +27,7 @@ services:
 #  nginx:
 #    restart: always
 #    build:
-#      context: ./nginx-reverseProxy
+#      context: ./nginx-reverse-proxy
 #    ports:
 #      - "80:80"
 
