@@ -13,10 +13,6 @@ function IndexRoutes (app: Express) {
       message: 'Hello World this POST'
     })
   })
-
-  app.get('/fenixx', (req: Request, res: Response) => {
-    res.status(301).redirect('https://fenixx-repack.3dn.ru')
-  })
 }
 
 export default IndexRoutes
