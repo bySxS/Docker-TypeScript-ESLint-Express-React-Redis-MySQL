@@ -13,14 +13,15 @@ RUN apk add nano mc
 WORKDIR /usr/src/app
 COPY package* ./
 COPY src/ src/
-COPY production.env ./
+COPY production.env ./src/
+COPY production.env .env
 COPY tsconfig.json ./
 COPY .eslintrc.json ./
 RUN ["npm", "install", "-g", "npm@latest"]
 RUN ["npm", "install"]
 
-#CMD ["npm", "run", "dev"]
-CMD ["npm run dev && /bin/bash"]
+CMD ["npm", "run", "prod"]
+#CMD ["npm run dev && /bin/bash"]
 
 
 # Lints Code

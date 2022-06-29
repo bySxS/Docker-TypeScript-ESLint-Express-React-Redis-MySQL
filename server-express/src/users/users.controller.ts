@@ -6,6 +6,11 @@ import { compareSync } from 'bcryptjs'
 import RolesService from '../roles/roles.service'
 import Logger, { IError } from '../logger'
 import { IJwt } from './users.interface'
+import dotenv from 'dotenv'
+dotenv.config({
+    debug: true,
+    override: true
+})
 
 function generateAccessToken(id: number, nickname: string, roles: string, rolesId: number): string {
     const payload: IJwt = {

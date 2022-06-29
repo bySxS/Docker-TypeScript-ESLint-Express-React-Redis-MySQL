@@ -18,8 +18,12 @@ services:
 #         memory: '50M'
       restart_policy:
         condition: on-failure
-    command: sh -c 'npm run migrate && npm run seedAdd'
-    working_dir: /usr/src/app
+#    environment:
+#      - ENVIRONMENT=production
+#      - NODE_ENV=production
+# для первого раза импорт в бд
+#    command: sh -c 'npm run migrate && npm run seedAdd'
+#    working_dir: /usr/src/app
 #  nginx:
 #    restart: always
 #    build:

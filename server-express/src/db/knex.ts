@@ -1,4 +1,10 @@
 import logger from '../logger'
+import dotenv from 'dotenv'
+dotenv.config({
+  debug: true,
+  override: true
+})
+
 
 interface IKnexConfig {
     [key: string]: object;

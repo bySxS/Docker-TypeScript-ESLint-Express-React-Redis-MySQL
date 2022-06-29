@@ -1,7 +1,11 @@
 import { buildDevLogger } from './dev-logger'
 import { buildProdLogger } from './prod-logger'
 import { Logger } from 'winston'
-
+import dotenv from 'dotenv'
+dotenv.config({
+  debug: true,
+  override: true
+})
 
 let logger: Logger
 const environment: string = process.env.NODE_ENV || 'development'
