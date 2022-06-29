@@ -53,6 +53,7 @@
     "milliseconds": "^1.0.3",
     "mysql": "^2.18.1",
     "objection": "^3.0.1",
+    "os": "^0.1.2",
     "redis": "^4.1.0",
     "winston": "^3.8.0"
   }

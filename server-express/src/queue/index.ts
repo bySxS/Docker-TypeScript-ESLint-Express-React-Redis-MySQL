@@ -4,7 +4,9 @@ import { Users } from '../users/users.model'
 import dotenv from 'dotenv'
 dotenv.config()
 
-const REDIS_URL: string = process.env.REDIS_QUEUE_URL || 'redis://localhost:6379'
+const REDIS_HOST: string = process.env.REDIS_QUEUE_HOST || 'localhost'
+const REDIS_PORT: number = Number(process.env.REDIS_QUEUE_PORT) || 6379
+const REDIS_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT
 export const userQueueDB = new Queue('user-db-queue', REDIS_URL)// db0 redis
 
 // userQueueDB.process('clearCache', async (job, done) => {

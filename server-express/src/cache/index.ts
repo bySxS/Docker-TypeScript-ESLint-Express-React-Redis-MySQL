@@ -4,7 +4,9 @@ import logger, { IError } from '../logger'
 import dotenv from 'dotenv'
 dotenv.config()
 
-const REDIS_URL: string = process.env.REDIS_CACHE_URL || 'redis://localhost:6379'
+const REDIS_HOST: string = process.env.REDIS_CACHE_HOST || 'localhost'
+const REDIS_PORT: number = Number(process.env.REDIS_CACHE_PORT) || 6379
+const REDIS_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT
 const client = createClient({
   url: REDIS_URL,
   database: 1

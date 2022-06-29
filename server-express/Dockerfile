@@ -1,12 +1,26 @@
 #копирует исходный код и запустите установку NPM
-FROM node:16.15.1-alpine3.16 as builder
+FROM node:alpine as builder
+
+RUN apk update
+RUN apk add nano mc
+#\
+#    && apk add --update bash \
+#    && apk add --update npm \
+#    && apk add --no-cache --purge -uU redis \
+#    && apk add git \
+#    && apk add bash-completion
+
 WORKDIR /usr/src/app
 COPY package* ./
 COPY src/ src/
+COPY .env ./
+COPY tsconfig.json ./
+COPY .eslintrc.json ./
+RUN ["npm", "install", "-g", "npm@latest"]
 RUN ["npm", "install"]
-# Наше приложение работает на порту 3000 в контейнере, поэтому необходимо его разоблачить
-EXPOSE 3000
-RUN ["npm", "run", "dev"]
+
+CMD ["npm", "run", "dev"]
+
 
 # Lints Code
 #FROM node:16.15.1-alpine3.16 as linting

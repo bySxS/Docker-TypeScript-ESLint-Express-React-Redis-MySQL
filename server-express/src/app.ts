@@ -5,11 +5,12 @@ import UsersRoutes from './users/users.routes'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
-dotenv.config()
 import logger from './logger'
+import os from 'os'
+dotenv.config()
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT
 
 const corsOptions = { origin: '*', optionsSuccessStatus: 200 }
 const corsSetting = function (req: Request, res: Response, next: NextFunction) {
@@ -27,5 +28,5 @@ IndexRoutes(app)
 UsersRoutes(app)
 
 app.listen(PORT, () => {
-  logger.info('Server started at PORT 3000')
+  logger.info('Server started at PORT ' + PORT + ' , host: ' + os.hostname())
 })

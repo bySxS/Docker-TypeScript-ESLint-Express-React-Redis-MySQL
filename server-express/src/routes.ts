@@ -1,9 +1,10 @@
 import { Express, Request, Response } from 'express'
+import os from 'os'
 // import {check} from "express-validator";
 
 function IndexRoutes (app: Express) {
   app.get('/', (req: Request, res: Response) => {
-    return res.status(200).send('Hello World this GET')
+    return res.status(200).send('Hello World this GET , host:' + os.hostname())
   })
 
   app.post('/', (req: Request, res: Response) => {
