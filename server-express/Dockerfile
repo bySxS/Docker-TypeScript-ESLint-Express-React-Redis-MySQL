@@ -13,6 +13,7 @@ RUN apk add nano mc
 WORKDIR /usr/src/app
 COPY package* ./
 COPY src/ src/
+COPY node_modules/ node_modules/
 COPY production.env ./src/
 COPY production.env .env
 COPY tsconfig.json ./
@@ -25,13 +26,13 @@ CMD ["npm", "run", "prod"]
 
 
 # Lints Code
-#FROM node:16.15.1-alpine3.16 as linting
+#FROM node:alpine as linting
 #WORKDIR /usr/src/app
-#COPY — from=builder /usr/src/app/src .
+#COPY — from=builder /usr/src .
 #RUN ["npm", "eslint"]
 
 # run the static code analyzer
-#FROM node:16.15.1-alpine3.16 as sonarqube
-#COPY — from=builder /usr/src/app/src /root/src
+#FROM node:alpine as sonarqube
+#COPY — from=builder /usr/src /root/src
 #WORKDIR /root/src/
 #RUN ["npm", "sonar"]
