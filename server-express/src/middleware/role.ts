@@ -1,12 +1,13 @@
 import { Request, Response, NextFunction } from 'express'
 import Logger, { IError } from '../logger'
-import { AuthMiddleware } from './auth'
-// import { Secret, verify } from 'jsonwebtoken'
-// import { IJwt } from '../users/users.interface'
+import { Auth } from './auth'
 
 export const RoleMiddleware = (roles: string[] | string) => {
   return function (req: Request, res: Response, next: NextFunction) {
-    AuthMiddleware(req, res, next)
+    if (!Auth(req)) {
+      return res.status(403)
+        .json({ message: 'Пользователь не авторизован или время сессии истекло' })
+    }
     try {
       const jwtPayload = req.user
 
@@ -41,7 +42,7 @@ export const RoleMiddleware = (roles: string[] | string) => {
       const err = e as IError
       Logger.error(err.message, { middleware: 'RoleMiddleware' })
       return res.status(403)
-        .json({ message: 'Пользователь не авторизован' })
+        .json({ message: 'У вас нет доступа' })
     }
   }
 }

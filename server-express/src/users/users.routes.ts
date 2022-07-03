@@ -1,24 +1,15 @@
 import { Express } from 'express'
 import UsersController from './users.controller'
-import { check } from 'express-validator'
 import { RoleMiddleware } from '../middleware/role'
 import { AuthMiddleware } from '../middleware/auth'
 import logger, { IError } from '../logger'
+import { validateRegistration } from './users.validator'
 
 function UsersRoutes (app: Express) {
   try {
-    app.post('/registration',
-      [
-        check('nickname',
-          'Имя пользователя не может быть пустым')
-          .notEmpty(),
-        check('password',
-          'Пароль должен быть больше 4 и меньше 10 символов')
-          .isLength({ min: 4, max: 10 })
-      ], UsersController.registration)
-
+    app.post('/registration', validateRegistration(), UsersController.registration)
     app.post('/login', UsersController.login)
-    app.get('/users', UsersController.getUsers)
+    app.get('/users', RoleMiddleware(['user', 'moder', 'admin']), UsersController.getUsers)
     app.get('/users/:id', AuthMiddleware, UsersController.getUserById)
     app.delete('/del_users/:id', RoleMiddleware(['admin']), UsersController.deleteUserById)
     app.put('/user_update/:id', AuthMiddleware, UsersController.updateUser)
