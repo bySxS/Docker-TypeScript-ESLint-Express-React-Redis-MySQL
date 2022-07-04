@@ -1,11 +1,11 @@
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { validationResult } from 'express-validator'
 import UsersService from './users.service'
 import { Secret, sign } from 'jsonwebtoken'
 import { compareSync } from 'bcryptjs'
 import RolesService from '../roles/roles.service'
-import Logger, { IError } from '../logger'
 import { IJwt } from './users.interface'
+import AppError from '../appError'
 
 function generateAccessToken(id: number, nickname: string, roles: string, rolesId: number): string {
     const payload: IJwt = {
@@ -23,52 +23,47 @@ function generateAccessToken(id: number, nickname: string, roles: string, rolesI
 
 
 class UsersController {
-    private static instance: UsersController;
+    private static instance: UsersController
 
     static getInstance(): UsersController { //паттерн singleton одиночка
         if (!UsersController.instance) {
-            UsersController.instance = new UsersController();
+            UsersController.instance = new UsersController()
         }
-        return UsersController.instance;
+        return UsersController.instance
     }
 
 ///////////////
-    async registration(req: Request, res: Response) {
+    async registration(req: Request, res: Response, next: NextFunction) {
         try {
-            const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                return res.status(400)
-                    .json({message: "Ошибка при регистрации", errors})
+            const errorsValid = validationResult(req)
+            if (!errorsValid.isEmpty()) {
+                throw new AppError('Ошибка при регистрации. ' + errorsValid,
+                  400,  'registration')
             }
             const result = await UsersService.registration(req.body)
             return res.status(201).json(result)
-        } catch (e) {
-            const err = e as IError
-            Logger.error(err.message, {controller_users: 'registration'})
-            return res.status(400).json('что-то пошло не так!')
+        } catch (err) {
+            next(err)
         }
     }///////////////registration
 
 
-    async login(req: Request, res: Response) {
+    async login(req: Request, res: Response, next: NextFunction) {
         try {
             let password: string
             let nickname: string
             ({password, nickname} = req.body)
             const user = await UsersService.getUserByNickname(req.body)
             if (!user.result) {
-                return res.status(400)
-                    .json(user.message)
+                throw new AppError(user.message, 400, 'login')
             }
             const roles = await RolesService.getRoleById(user.result.roles_id)
             if (!roles.result) {
-                return res.status(400)
-                    .json(roles.message)
+                throw new AppError(roles.message, 400, 'login')
             }
             const validPassword = compareSync(password, user.result.password)
             if (!validPassword) {
-                return res.status(400)
-                    .json({message: `Введен неверный пароль`})
+                throw new AppError('Введен неверный пароль', 400, 'login')
             }
             const token = generateAccessToken(
                 user.result.id,
@@ -76,76 +71,66 @@ class UsersController {
                 roles.result.name,
                 user.result.roles_id)
             return res.json({token})
-        } catch (error) {
-            const err = error as IError
-            Logger.error(err.message, {controller_users: 'login'})
-            return res.status(400).json({message: 'Login error'})
+        } catch (err) {
+          next(err)
         }
     } /////////////////login
     
-    async updateUser(req: Request, res: Response) {
+    async updateUser(req: Request, res: Response, next: NextFunction) {
             try {
                 if (!req.params.id) {
-                    return res.status(500).json('Не указан Id пользователя')
+                    throw new AppError('Не указан Id пользователя', 400, 'updateUser')
                 }
                 const id = Number(req.params.id)
                 const authUser = req.user as IJwt
                 const result = await UsersService.updateUserById(id, req.body, authUser.roles_id)
                 return res.status(201).json(result.message)
-            } catch (error) {
-                const err = error as IError
-                Logger.error(err.message, {controller_users: 'updateUser'})
-                return res.status(500).json('updateUser error')
+            } catch (err) {
+                next(err)
             }
     }
     
 
-    async getUsers(req: Request, res: Response) {
+    async getUsers(req: Request, res: Response, next: NextFunction) {
 
         try {
             const limit: number = Number(req.query.limit || 10)
             const offset: number = Number(req.query.offset || 1)
             const listUsers = await UsersService.getUsers(limit, offset)
             return res.status(200).json(listUsers)
-        } catch (error) {
-            const err = error as IError
-            Logger.error(err.message, {controller_users: 'getUsers'})
-            return res.status(500).json('Не удалось получить список пользователей')
+        } catch (err) {
+           next(err)
         }
 
     }
 
-    async getUserById(req: Request, res: Response) {
+    async getUserById(req: Request, res: Response, next: NextFunction) {
         try {
             if (!req.params.id) {
-                return res.status(500).json('Не указан Id пользователя')
+                throw new AppError('Не указан Id пользователя', 400, 'getUserById')
             }
             const id = Number(req.params.id)
             const User = await UsersService.getUserById(id)
             return res.status(200).send(User)
-        } catch (e) {
-            const err = e as IError
-            Logger.error(err.message, {controller_users: 'getUserById'})
-            return res.status(500).json('getUserById error')
+        } catch (err) {
+            next(err)
         }
     }
     
-    async deleteUserById(req: Request, res: Response) {
+    async deleteUserById(req: Request, res: Response, next: NextFunction) {
         try {
             if (!req.params.id) {
-                return res.status(500).json('Не указан Id пользователя')
+                throw new AppError('Не указан Id пользователя', 400, 'deleteUserById')
             }
             const id = Number(req.params.id)
             const User = await UsersService.deleteUserById(id)
             return res.status(200).send(User)
-        } catch (e) {
-            const err = e as IError
-            Logger.error(err.message, {controller_users: 'deleteUserById'})
-            return res.status(500).json('deleteUserById error')
+        } catch (err) {
+           next(err)
         }
     }
 
-    async searchUsers(req: Request, res: Response) {
+    async searchUsers(req: Request, res: Response, next: NextFunction) {
 
         try {
             //const start = new Date().getTime();
@@ -156,14 +141,12 @@ class UsersController {
             //const end = new Date().getTime();
             //logger.info(`время выполнения - ${end - start}ms`, {controller_users: 'searchUsers'})
             return res.status(200).send(listUsers)
-        } catch (e) {
-            const err = e as IError
-            Logger.error(err.message, {controller_users: 'searchUsers'})
-            return res.status(500).json('что-то пошло не так!')
+        } catch (err) {
+            next(err)
         }
     }
 
 
 }
 
-export default UsersController.getInstance();
+export default UsersController.getInstance()

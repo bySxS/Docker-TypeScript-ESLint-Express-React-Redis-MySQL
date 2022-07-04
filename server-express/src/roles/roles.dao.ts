@@ -21,11 +21,15 @@ class RolesDao implements IRolesDao {
       })
 
       return {
+        success: true,
         result,
         message: `Группа пользователей ${nameRus} успешно добавлена!`
       }
     } catch (e) {
-      return { message: 'Произошла ошибка при добавлении Группы пользователей!' }
+      return {
+        success: true,
+        message: 'Произошла ошибка при добавлении Группы пользователей!'
+      }
     }
   }
 
@@ -33,11 +37,15 @@ class RolesDao implements IRolesDao {
     try {
       const result = await Roles.query().findById(id)
       return {
+        success: true,
         result,
         message: `Группа по ID ${id} получена`
       }
     } catch (e) {
-      return { message: 'Произошла ошибка получения группы по ID' }
+      return {
+        success: false,
+        message: 'Произошла ошибка получения группы по ID'
+      }
     }
   }
 
@@ -46,11 +54,15 @@ class RolesDao implements IRolesDao {
       const result = await Roles.query()
 
       return {
+        success: true,
         result,
         message: 'Все Группы полученны'
       }
     } catch (e) {
-      return { message: 'Произошла ошибка получения груп' }
+      return {
+        success: true,
+        message: 'Произошла ошибка получения груп'
+      }
     }
   }
 }

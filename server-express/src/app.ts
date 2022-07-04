@@ -13,6 +13,8 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import logger from './logger'
 import os from 'os'
+import { errorMiddleware } from './middleware/error'
+import RolesRoutes from './roles/roles.routes'
 // import path from 'path'
 // const env: string = process.env.NODE_ENV || 'production'
 
@@ -31,8 +33,11 @@ app.use(cookieParser())
 app.use(cors(corsOptions))
 app.use(corsSetting)
 app.use(express.urlencoded({ extended: true }))
-IndexRoutes(app)
 UsersRoutes(app)
+RolesRoutes(app)
+IndexRoutes(app)
+
+app.use(errorMiddleware)
 
 app.listen(PORT, () => {
   logger.info('Server started at PORT ' + PORT + ' , host: ' + os.hostname())

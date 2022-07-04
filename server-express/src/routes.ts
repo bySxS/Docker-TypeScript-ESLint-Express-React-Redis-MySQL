@@ -1,17 +1,17 @@
-import { Express, Request, Response } from 'express'
+import { Express, NextFunction, Request, Response } from 'express'
 import os from 'os'
-// import {check} from "express-validator";
+import AppError from './appError'
 
 function IndexRoutes (app: Express) {
   app.get('/', (req: Request, res: Response) => {
-    return res.status(200).send('Hello World this GET , host: ' + os.hostname())
+    return res.status(200).json({
+      message: 'Hello World this GET , host: ' + os.hostname(),
+      success: true
+    })
   })
 
-  app.post('/', (req: Request, res: Response) => {
-    return res.status(200).json({
-      ip: req.ip,
-      message: 'Hello World this POST'
-    })
+  app.all('*', (req: Request, res: Response, next: NextFunction) => {
+    throw new AppError(`Request URL ${req.path} not found!`, 404)
   })
 }
 

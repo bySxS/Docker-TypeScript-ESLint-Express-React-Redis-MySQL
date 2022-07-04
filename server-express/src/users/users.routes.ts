@@ -2,8 +2,8 @@ import { Express } from 'express'
 import UsersController from './users.controller'
 import { RoleMiddleware } from '../middleware/role'
 import { AuthMiddleware } from '../middleware/auth'
-import logger, { IError } from '../logger'
 import { validateRegistration } from './users.validator'
+import AppError from '../appError'
 
 function UsersRoutes (app: Express) {
   try {
@@ -15,8 +15,7 @@ function UsersRoutes (app: Express) {
     app.put('/user_update/:id', AuthMiddleware, UsersController.updateUser)
     app.get('/search_users', AuthMiddleware, UsersController.searchUsers)
   } catch (e) {
-    const err = e as IError
-    logger.error('UsersRoutes error ' + err.message, { Routes: 'Users' })
+    throw new AppError('Ошибка в Users routers')
   }
 }
 

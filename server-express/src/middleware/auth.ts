@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { Secret, verify } from 'jsonwebtoken'
 import { IJwt } from '../users/users.interface'
-import Logger, { IError } from '../logger'
+import AppError from '../appError'
 
 export const Auth = (req: Request): boolean => {
   try {
@@ -16,8 +16,6 @@ export const Auth = (req: Request): boolean => {
 
     req.user = verify(token, secret) as IJwt
   } catch (e) {
-    const err = e as IError
-    Logger.error(err.message, { middleware: 'AuthMiddleware' })
     return false
   }
   return true
@@ -28,8 +26,7 @@ export const AuthMiddleware = (req: Request, res: Response, next: NextFunction) 
     next()
   }
   if (!Auth(req)) {
-    return res.status(403)
-      .json({ message: 'Пользователь не авторизован или время сессии истекло' })
+    throw new AppError('Пользователь не авторизован или время сессии истекло', 403, 'AuthMiddleware')
   }
   next()
 }

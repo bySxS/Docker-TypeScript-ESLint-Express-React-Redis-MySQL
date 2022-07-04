@@ -1,6 +1,5 @@
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import RolesService from './roles.service'
-import Logger, { IError } from '../logger'
 
 class RolesController {
   // eslint-disable-next-line no-use-before-define
@@ -13,14 +12,12 @@ class RolesController {
     return RolesController.instance
   }
 
-  async AddRole (req: Request, res: Response) {
+  async AddRole (req: Request, res: Response, next: NextFunction) {
     try {
       const result = await RolesService.AddRole(req.body)
       res.status(201).json(result)
-    } catch (error) {
-      const err = error as IError
-      Logger.error(`${err.message}`, { roles_controller: 'AddRole' })
-      res.status(500).json('что-то пошло не так!')
+    } catch (err) {
+      next(err)
     }
   }
 }
