@@ -79,6 +79,7 @@ const MovieDetails: FC<MovieDetailsItemProps> = ({ modulePage }) => {
     )
   }
 
+  // TODO: изменить вид файла
   return (
       <div className={'body'}>
         <Card
