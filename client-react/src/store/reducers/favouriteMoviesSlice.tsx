@@ -4,7 +4,11 @@ import { IFavouriteMovies, IMovie, MovieAction, MovieActionType } from '../../ty
 const favMoviesString = localStorage.getItem('favouriteMovies') || ''
 let favMovies: IMovie[] = []
 if (favMoviesString) {
-  favMovies = JSON.parse(favMoviesString) as IMovie[]
+  try {
+    favMovies = JSON.parse(favMoviesString) as IMovie[]
+  } catch (e) {
+    favMovies = []
+  }
 }
 
 const initialState: IFavouriteMovies = {
@@ -25,7 +29,6 @@ export const favouriteMoviesReducer =
           }
         }
         return {
-          // count: res.length,
           movies: res,
           error: ''
         }
@@ -41,7 +44,6 @@ export const favouriteMoviesReducer =
         localStorage.setItem('favouriteMovies', JSON.stringify(res))
         return {
           movies: res,
-          // count: res.length,
           error: ''
         }
       }
