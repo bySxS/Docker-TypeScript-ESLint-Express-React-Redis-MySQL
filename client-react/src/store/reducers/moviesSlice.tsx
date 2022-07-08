@@ -8,7 +8,6 @@ import {
 
 const initialState: IMovieState = {
   results: [],
-  // count: 0,
   error: '',
   page: 0,
   currPage: 0,
@@ -34,7 +33,6 @@ export const moviesReducer =
           total_pages: action.payload.total_pages,
           total_results: action.payload.total_results,
           results: res,
-          // count: res.length,
           error: ''
         }
       }
@@ -46,34 +44,3 @@ export const moviesReducer =
         return state
     }
   }
-
-// const moviesSlice = createSlice({
-//   name: 'movies',
-//   initialState,
-//   reducers: {},
-//   extraReducers: {  (builder) => {
-// builder
-//   .addCase(fetchMovies.fulfilled,
-//     (state: IMovieState, action) => {
-//       if (action.payload.results) {
-//         const ids = new Set(state.results.map(o => o.id))
-//         state.results = [
-//           ...state.results,
-//           ...action.payload.results.filter(o => !ids.has(o.id))
-//         ]
-//       }
-//       state.page = action.payload.page
-//       state.currPage = action.payload.currPage + 1
-//       state.dates = action.payload.dates
-//       state.total_pages = action.payload.total_pages
-//       state.total_results = action.payload.total_results
-//     })
-//   .addCase(fetchMovies.rejected,
-//     (state: IMovieState, action: string | RejectedValue<any>) => {
-//       state.error = action.payload
-//       state.error = state.error + ' ' + action.error.message || ''
-//     })
-//   }
-// })
-
-// export default moviesSlice.reducer
