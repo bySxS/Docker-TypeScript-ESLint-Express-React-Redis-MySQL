@@ -12,9 +12,7 @@ import { IMovie } from '../../types/movie'
 
 const Movies = () => {
   const movies: IMovie[] = useAppSelector(receivedMovies)
-  // const count = useAppSelector(countMovies)
   const loading = useAppSelector(loadingFetch)
-  // const page = useAppSelector(pageMovies)
   const currPage = useAppSelector(currPageMovies)
   const totalPages = useAppSelector(totalPagesMovies)
   const pagination = useRef<HTMLHeadingElement>(null)

@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { IMovie, MovieActionType } from '../../types/movie'
 import { IRootState } from '../index'
-// import from service movie
 
 export const addMovieToFavourite =
   createAsyncThunk<

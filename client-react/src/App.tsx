@@ -21,13 +21,13 @@ function App () {
         <Routes>
           <Route path={'/'}
                  element={<Navigate to={`/${ModuleType.MOVIES}`} />}/>
-          <Route path={`/${ModuleType.MOVIES as string}`}
+          <Route path={`/${ModuleType.MOVIES}`}
                  element={<Movies/>}/>
-          <Route path={`/${ModuleType.MOVIES as string}/:id`}
+          <Route path={`/${ModuleType.MOVIES}/:id`}
                  element={<MovieDetails modulePage={ModuleType.MOVIES}/>}/>
-          <Route path={`/${ModuleType.FAVOURITE_MOVIES as string}`}
+          <Route path={`/${ModuleType.FAVOURITE_MOVIES}`}
                  element={<FavouriteMovies/>}/>
-          <Route path={`/${ModuleType.FAVOURITE_MOVIES as string}/:id`}
+          <Route path={`/${ModuleType.FAVOURITE_MOVIES}/:id`}
                  element={<MovieDetails modulePage={ModuleType.FAVOURITE_MOVIES}/>}/>
           <Route path={'/loader'}
                  element={<Loader/>}/>
