@@ -1,9 +1,14 @@
 // import { createSlice } from '@reduxjs/toolkit'
 import { IFavouriteMovies, IMovie, MovieAction, MovieActionType } from '../../types/movie'
 
+const favMoviesString = localStorage.getItem('favouriteMovies') || ''
+let favMovies: IMovie[] = []
+if (favMoviesString) {
+  favMovies = JSON.parse(favMoviesString) as IMovie[]
+}
+
 const initialState: IFavouriteMovies = {
-  // count: 0,
-  movies: [],
+  movies: favMovies,
   error: ''
 }
 
@@ -16,6 +21,7 @@ export const favouriteMoviesReducer =
           const ids = new Set(state.movies.map(o => o.id))
           if (!ids.has(action.payload.id)) {
             res = [...res, action.payload]
+            localStorage.setItem('favouriteMovies', JSON.stringify(res))
           }
         }
         return {
@@ -32,6 +38,7 @@ export const favouriteMoviesReducer =
       case MovieActionType.DEL_FROM_FAVOURITE_MOVIE_fulfilled: {
         const id: number = action.payload
         const res = state.movies.filter((movie) => movie.id !== id)
+        localStorage.setItem('favouriteMovies', JSON.stringify(res))
         return {
           movies: res,
           // count: res.length,
