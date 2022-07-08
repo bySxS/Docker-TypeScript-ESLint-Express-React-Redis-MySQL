@@ -1,4 +1,3 @@
-// import { createSlice } from '@reduxjs/toolkit'
 import {
   IMovie,
   IMovieState,

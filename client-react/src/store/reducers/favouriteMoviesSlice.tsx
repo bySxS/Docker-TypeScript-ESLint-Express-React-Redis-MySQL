@@ -1,4 +1,3 @@
-// import { createSlice } from '@reduxjs/toolkit'
 import { IFavouriteMovies, IMovie, MovieAction, MovieActionType } from '../../types/movie'
 
 const favMoviesString = localStorage.getItem('favouriteMovies') || ''
