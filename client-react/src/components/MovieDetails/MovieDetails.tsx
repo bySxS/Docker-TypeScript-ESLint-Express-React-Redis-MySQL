@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useState } from 'react'
 import { IMovie, MovieDetailsItemProps, MovieDetailsParams } from '../../types/movie'
-import classes from '../MovieItem/MovieItem.module.scss'
-import { Card } from 'react-bootstrap'
+import classItem from '../MovieItem/MovieItem.module.scss'
+import classDetails from './MovieDetails.module.scss'
+import { Card, Stack } from 'react-bootstrap'
 import { isFavoriteMovie } from '../../services/moviesService'
 import { useAppDispatch, useAppSelector } from '../../hooks/useStore'
 import { addMovieToFavourite, delMovieToFavourite } from '../../store/actions/favouriteMoviesActions'
@@ -81,24 +82,41 @@ const MovieDetails: FC<MovieDetailsItemProps> = ({ modulePage }) => {
 
   // TODO: изменить вид файла
   return (
-      <div className={'body'}>
+      <div className={classDetails.details_body}>
         <Card
           text={'secondary'}
           bg={'dark'}
-          className={`${classes.Item} mb-2`}
+          className={`${classDetails.details_movie} mb-2`}
         >
-          <Card.Img src={movie.poster_path}/>
-          <Card.Title className={classes.title}>
-            {movie.title}
-            <div className={classes.like_movie}>
-              {isLiked
-                ? <i className="bi bi-heart-fill"
-                     onClick={dislikeMovie}></i>
-                : <i className="bi bi-heart"
-                     onClick={likeMovie}></i>
-              }
-            </div>
-          </Card.Title>
+        <Stack className={classDetails.autosize} direction="horizontal" gap={3}>
+          <div>
+            <Card.Img className={classDetails.movie_cover}
+                      src={movie.poster_path}/></div>
+            <Card.Body className={`ms-auto ${classDetails.movie_info}`}>
+              <Card.Title className={classItem.title}>
+              {movie.title}
+              </Card.Title>
+              <div>
+              <Card.Text>
+                <b>Описание</b>: {movie.overview}
+              </Card.Text>
+              <Card.Text>
+                <b>Дата выхода</b>: {movie.release_date}
+                {}
+              </Card.Text>
+              </div>
+          </Card.Body>
+          <div>
+            <div className={classItem.like_movie}>
+            {isLiked
+              ? <i className="bi bi-heart-fill"
+                   onClick={dislikeMovie}></i>
+              : <i className="bi bi-heart"
+                   onClick={likeMovie}></i>
+            }
+          </div>
+          </div>
+        </Stack>
         </Card>
       </div>
   )
