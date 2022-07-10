@@ -8,6 +8,7 @@ const host: string = process.env.MYSQL_HOST || 'mysql'
 const port: string = process.env.MYSQL_PORT || '3306'
 const user: string = process.env.MYSQL_USER || 'sxs'
 const password: string = process.env.MYSQL_PASS || '123456789s'
+const database: string = process.env.MYSQL_DB_NAME || 'site-ts-test'
 
 const defaultConf = {
   client: 'mysql',
@@ -16,7 +17,7 @@ const defaultConf = {
     port,
     user,
     password,
-    database: 'site-ts-test',
+    database,
     charset: 'utf8'
   }
 }
@@ -25,19 +26,19 @@ const knexConfig: IKnexConfig = {
   test: {
     ...defaultConf,
     connection: { // migrations
-      database: 'site-ts-test'
+      database
     }
   },
   development: {
     ...defaultConf,
     connection: { // migrations
-      database: 'site-ts-test'
+      database
     }
   },
   production: {
     ...defaultConf,
     connection: {
-      database: 'site-ts-test'
+      database
     }
   },
   migrations: {
@@ -72,7 +73,7 @@ module.exports = { // для migrate: make только с этим работа
       port,
       user,
       password,
-      database: 'site-ts-test',
+      database,
       charset: 'utf8'
     }
   },
@@ -83,7 +84,7 @@ module.exports = { // для migrate: make только с этим работа
       port,
       user,
       password,
-      database: 'site-ts-test',
+      database,
       charset: 'utf8'
     }
   },
@@ -94,7 +95,7 @@ module.exports = { // для migrate: make только с этим работа
       port,
       user,
       password,
-      database: 'site-ts-test',
+      database,
       charset: 'utf8'
     }
   },

@@ -6,24 +6,56 @@ services:
     restart: always
     ports:
       - "6379:6379"
-    command: redis-server --daemonize yes --save 20 1 --loglevel warning
-  server_express:
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - cache:/data
+
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456789ss"
+      MYSQL_USER: "sxs"
+      MYSQL_PASSWORD: "123456789s"
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mySqlData:/var/lib/mysql
+      - ./mysql/import:/docker-entrypoint-initdb.d
+    restart: always
+
+  client:
+    build:
+      context: ./client-react
+    restart: always
+
+  migrate:
     build:
       context: ./server-express
+    depends_on:
+      - mysql
+    restart: on-failure
+    command: sh -c 'npm run migrate && npm run seedAdd'
+    working_dir: /usr/src/app
+
+  server:
+    build:
+      context: ./server-express
+    restart: always
+    depends_on:
+      - mysql
     deploy:
       replicas: 3
-#     resources:
-#       limits:
-#         cpus: "0.1"
-#         memory: '50M'
+      #     resources:
+      #       limits:
+      #         cpus: "0.1"
+      #         memory: '50M'
       restart_policy:
         condition: on-failure
-#    environment:
-#      - ENVIRONMENT=production
-#      - NODE_ENV=production
-# для первого раза импорт в бд
-#    command: sh -c 'npm run migrate && npm run seedAdd'
-#    working_dir: /usr/src/app
+    command: sh -c 'npm run prod'
+    working_dir: /usr/src/app
+
   nginx:
     restart: always
     build:
@@ -31,6 +63,20 @@ services:
     ports:
       - "80:80"
 
+  adminer:
+    container_name: adminer
+    image: adminer:latest
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql
+
 networks:
   default:
-    name: net
+    name: net_react_express_nginx
+volumes:
+  mySqlData:
+    driver: local
+  cache:
+    driver: local
