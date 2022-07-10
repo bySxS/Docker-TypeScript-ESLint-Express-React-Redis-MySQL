@@ -1,41 +1,28 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import { IMovie, MovieActionType } from '../../types/movie'
-import { IRootState } from '../index'
+import { AppDispatch } from '../index'
+import {
+  addToFavouriteError,
+  addToFavouriteSuccess,
+  delFromFavouriteError,
+  delFromFavouriteSuccess
+} from '../reducers/favouriteMoviesSlice'
+import { IMovie } from '../../types/movie'
 
 export const addMovieToFavourite =
-  createAsyncThunk<
-    IMovie, {id: number},
-    {state: IRootState}
-    >(MovieActionType.ADD_TO_FAVOURITE_MOVIE,
-      ({ id }, thunkAPI) => {
-        try {
-          const movies = thunkAPI.getState().movies.results
-          const movie = movies.filter((val) => val.id === id)
-          if (movie[0]) {
-            return movie[0]
-          } else {
-            return thunkAPI.rejectWithValue(
-              `Фильма по id ${id} не найдено`
-            )
-          }
-        } catch (e) {
-          return thunkAPI.rejectWithValue(
-            'Произошла ошибка при добавлении фильма в избранное'
-          )
-        }
-      })
+  (movie: IMovie) =>
+    (dispatch: AppDispatch) => {
+      if (movie) {
+        dispatch(addToFavouriteSuccess(movie))
+      } else {
+        dispatch(addToFavouriteError('Ошибка добавления в избранное'))
+      }
+    }
 
-export const delMovieToFavourite =
-  createAsyncThunk<
-    number, {id: number},
-    {state: IRootState}
-    >(MovieActionType.DEL_FROM_FAVOURITE_MOVIE,
-      ({ id }, thunkAPI) => {
-        if (id) {
-          return id
-        } else {
-          return thunkAPI.rejectWithValue(
-            `Фильма по id ${id} не найдено`
-          )
-        }
-      })
+export const delMovieFromFavourite =
+  (id: number) =>
+    (dispatch: AppDispatch) => {
+      if (id > 0) {
+        dispatch(delFromFavouriteSuccess(id))
+      } else {
+        dispatch(delFromFavouriteError('Ошибка удаления в избранное'))
+      }
+    }

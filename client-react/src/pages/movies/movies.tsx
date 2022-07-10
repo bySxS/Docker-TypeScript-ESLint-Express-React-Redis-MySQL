@@ -1,29 +1,30 @@
-import React, { useRef, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../hooks/useStore'
-import { fetchMovies } from '../../store/actions/movieActions'
-import MovieItem from '../../components/MovieItem/MovieItem'
+import React, { useRef } from 'react'
+import { useAppDispatch, useAppSelector } from 'hooks/useStore'
+import { fetchMovies } from 'store/actions/movieActions'
+import MovieItem from 'components/MovieItem/MovieItem'
 import classes from './movie.module.scss'
-import { currPageMovies, receivedMovies, totalPagesMovies } from '../../store/selectors/moviesSelector'
-import { loadingFetch } from '../../store/selectors/userSelector'
-import { useObserver } from '../../hooks/useObserver'
-import Loader from '../../components/UI/Loader/loader'
-import { ModuleType } from '../../types/page'
-import { IMovie } from '../../types/movie'
+import {
+  currPageMovies, isLoadingMovies,
+  receivedMovies,
+  totalPagesMovies
+} from 'store/selectors/moviesSelector'
+import { loadingFetch } from 'store/selectors/userSelector'
+import { useObserver } from 'hooks/useObserver'
+import Loader from 'components/UI/Loader/loader'
+import { ModuleName } from 'constants/page'
+import { IMovie } from 'types/movie'
 
 const Movies = () => {
   const movies: IMovie[] = useAppSelector(receivedMovies)
   const loading = useAppSelector(loadingFetch)
   const currPage = useAppSelector(currPageMovies)
   const totalPages = useAppSelector(totalPagesMovies)
+  const isLoading = useAppSelector(isLoadingMovies)
   const pagination = useRef<HTMLHeadingElement>(null)
   const dispatch = useAppDispatch()
 
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-
   const getMovies = async () => {
-    setIsLoading(true)
-    await dispatch(await fetchMovies({ page: currPage }))
-    setIsLoading(false)
+    await dispatch(await fetchMovies(currPage))
   }
 
   useObserver(pagination, currPage, totalPages, loading, getMovies)
@@ -32,9 +33,14 @@ const Movies = () => {
     <div className={'body'}>
     <div className={ classes.itemMovie }>
       {movies.map((movie) =>
-        <MovieItem movie={movie} modulePage={ModuleType.MOVIES} checkLike={true} key={movie.id} />
+        <MovieItem movie={movie}
+                   modulePage={ModuleName.MOVIES}
+                   checkLike={true}
+                   key={movie.id}
+        />
       )}
-       <div ref={ pagination } className={ classes.autoPagination }/>
+       <div ref={ pagination }
+            className={ classes.autoPagination }/>
     </div>
       {isLoading &&
         <div>

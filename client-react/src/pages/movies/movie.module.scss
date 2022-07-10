@@ -1,3 +1,12 @@
+@media only screen and (max-width: 735px) {
+  .itemMovie {
+    display: flex!important;
+    margin-left: auto!important;
+    flex-direction: column!important;
+    align-items: center!important;
+  }
+}
+
 .itemMovie {
   display: block;
 }

@@ -1,9 +1,9 @@
 import React from 'react'
-import { useAppSelector } from '../../hooks/useStore'
-import { getFavoriteMovie } from '../../store/selectors/favouriteMoviesSelectors'
+import { useAppSelector } from 'hooks/useStore'
+import { getFavoriteMovie } from 'store/selectors/favouriteMoviesSelectors'
 import classes from '../movies/movie.module.scss'
-import MovieItem from '../../components/MovieItem/MovieItem'
-import { ModuleType } from '../../types/page'
+import MovieItem from 'components/MovieItem/MovieItem'
+import { ModuleName } from 'constants/page'
 
 const FavouriteMovies = () => {
   const favoriteMovie = useAppSelector(getFavoriteMovie)
@@ -22,7 +22,10 @@ const FavouriteMovies = () => {
     <div className={'body'}>
     <div className={ classes.itemMovie }>
       {favoriteMovie.map((movie) =>
-        <MovieItem movie={movie} modulePage={ModuleType.FAVOURITE_MOVIES} checkLike={false} key={movie.id} />
+        <MovieItem movie={movie}
+                   modulePage={ModuleName.FAVOURITE_MOVIES}
+                   checkLike={false}
+                   key={movie.id} />
       )}
     </div>
     </div>

@@ -1,12 +1,12 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import { favouriteMoviesReducer } from './reducers/favouriteMoviesSlice'
-import { moviesReducer } from './reducers/moviesSlice'
+import favouriteMoviesSlice from './reducers/favouriteMoviesSlice'
 import userSlice from './reducers/userSlice'
-import { SUBSCRIBE_STORE } from '../constants'
+import movieSlice from './reducers/moviesSlice'
+import { SUBSCRIBE_STORE } from '../constants/constant'
 
 const reducers = {
-  favouriteMovies: favouriteMoviesReducer,
-  movies: moviesReducer,
+  favouriteMovies: favouriteMoviesSlice,
+  movies: movieSlice,
   user: userSlice
 }
 
@@ -14,14 +14,19 @@ const rootReducer = combineReducers({
   ...reducers
 })
 
-export const store = configureStore({
-  reducer: rootReducer
-})
+export const setupStore = () => {
+  return configureStore({
+    reducer: rootReducer,
+    devTools: true
+  })
+}
 
 // Can still subscribe to the store
 if (SUBSCRIBE_STORE) {
-  store.subscribe(() => console.log(store.getState()))
+  setupStore().subscribe(() =>
+    console.log(setupStore().getState()))
 }
 
-export type IRootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof rootReducer>
+export type AppStore = ReturnType<typeof setupStore>
+export type AppDispatch = AppStore['dispatch']

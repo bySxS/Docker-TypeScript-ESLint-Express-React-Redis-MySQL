@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IUserState } from '../../types/user'
+import { IUserState } from '../types/user'
 
 const initialState: IUserState = {
   loadingFetch: false,
@@ -22,6 +22,10 @@ const userSlice = createSlice({
   }
 })
 
-export const { loadingTrue, loadingFalse, setUsername } = userSlice.actions
+export const {
+  loadingTrue,
+  loadingFalse,
+  setUsername
+} = userSlice.actions
 
 export default userSlice.reducer

@@ -2,6 +2,13 @@
   .autosize {
     display: block!important;
   }
+  .img_position {
+    text-align: center!important;
+  }
+}
+
+.info_field {
+  margin-bottom: 0px;
 }
 
 .details_body {
@@ -10,6 +17,10 @@
 
 .details_movie {
   padding: 10px;
+}
+
+.img_position {
+  text-align: left;
 }
 
 .movie_cover {

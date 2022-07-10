@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 import { MovieItemProps } from '../../types/movie'
 import { Card } from 'react-bootstrap'
 import classes from './MovieItem.module.scss'
-import { getFavoriteMovie } from '../../store/selectors/favouriteMoviesSelectors'
+import { getFavoriteMovie } from 'store/selectors/favouriteMoviesSelectors'
 import { useAppSelector, useAppDispatch } from '../../hooks/useStore'
-import { isFavoriteMovie } from '../../services/moviesService'
-import { addMovieToFavourite, delMovieToFavourite } from '../../store/actions/favouriteMoviesActions'
+import { isFavoriteMovie } from 'services/moviesService'
+import { addMovieToFavourite, delMovieFromFavourite } from 'store/actions/favouriteMoviesActions'
 import { useNavigate } from 'react-router-dom'
 
 const MovieItem: FC<MovieItemProps> = ({ movie, checkLike, modulePage }) => {
@@ -16,12 +16,12 @@ const MovieItem: FC<MovieItemProps> = ({ movie, checkLike, modulePage }) => {
 
   const likeMovie = (e: React.MouseEvent) => {
     e.stopPropagation()
-    dispatch(addMovieToFavourite({ id: movie.id }))
+    dispatch(addMovieToFavourite(movie))
   }
 
   const dislikeMovie = (e: React.MouseEvent) => {
     e.stopPropagation()
-    dispatch(delMovieToFavourite({ id: movie.id }))
+    dispatch(delMovieFromFavourite(movie.id))
   }
 
   const goToMovieDetails = () => {
