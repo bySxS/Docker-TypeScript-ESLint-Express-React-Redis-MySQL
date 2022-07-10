@@ -1,7 +1,7 @@
 import {
   IFavouriteMoviesState
 } from '../types/favouriteMovie'
-import { IMovie } from '../../types/movie'
+import { IMovie } from 'types/movie'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const favMoviesString = localStorage.getItem('favouriteMovies') || ''

@@ -5,7 +5,7 @@ import {
   delFromFavouriteError,
   delFromFavouriteSuccess
 } from '../reducers/favouriteMoviesSlice'
-import { IMovie } from '../../types/movie'
+import { IMovie } from 'types/movie'
 
 export const addMovieToFavourite =
   (movie: IMovie) =>

@@ -4,7 +4,7 @@ import {
   moviesFetchingError,
   moviesFetchingSuccess
 } from '../reducers/moviesSlice'
-import { MoviePageType } from '../../types/movie'
+import { MoviePageType } from 'types/movie'
 import TheMovieDatabaseAPI from 'api/themoviedbApi'
 
 export const fetchMovies =

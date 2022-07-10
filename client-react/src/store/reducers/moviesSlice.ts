@@ -1,7 +1,7 @@
 import { IMovieState } from '../types/movie'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IMovie } from '../../types/movie'
-import { updateGenre } from '../../services/moviesService'
+import { IMovie } from 'types/movie'
+import { updateGenre } from 'services/moviesService'
 
 const initialState: IMovieState = {
   results: [],
