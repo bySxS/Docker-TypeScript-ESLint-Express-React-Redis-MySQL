@@ -1,14 +1,14 @@
 import React, { FC, useEffect, useState } from 'react'
-import { MovieDetailsItemProps, MovieDetailsParams } from '../../types/movie'
+import { MovieDetailsItemProps, MovieDetailsParams } from 'types/movie'
 import classItem from '../MovieItem/MovieItem.module.scss'
 import classDetails from './MovieDetails.module.scss'
 import { Card, Stack } from 'react-bootstrap'
 import { isFavoriteMovie } from 'services/moviesService'
-import { useAppDispatch, useAppSelector } from '../../hooks/useStore'
+import { useAppDispatch, useAppSelector } from 'hooks/useStore'
 import {
   addMovieToFavourite,
   delMovieFromFavourite
-} from '../../store/actions/favouriteMoviesActions'
+} from 'store/actions/favouriteMoviesActions'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ModuleName } from 'constants/page'
 import { getByIdMovie } from 'store/selectors/moviesSelector'
