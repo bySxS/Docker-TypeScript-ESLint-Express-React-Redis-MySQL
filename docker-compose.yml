@@ -2,6 +2,7 @@ version: '3.9'
 
 services:
   redis:
+    container_name: redis
     image: redis:alpine
     restart: always
     ports:
@@ -26,11 +27,13 @@ services:
     restart: always
 
   client:
+    container_name: react_client
     build:
       context: ./client-react
     restart: always
 
   migrate:
+    container_name: migrate_import_db
     build:
       context: ./server-express
     depends_on:
@@ -57,11 +60,19 @@ services:
     working_dir: /usr/src/app
 
   nginx:
+    container_name: nginx
     restart: always
     build:
       context: ./nginx-reverse-proxy
+    volumes:
+      - "./nginx-reverse-proxy/conf.d:/etc/nginx/conf.d"
+      - "./nginx-reverse-proxy/certs:/etc/nginx/certs"
+      - "./nginx-reverse-proxy/vhost.d:/etc/nginx/vhost.d"
+      - "./nginx-reverse-proxy/www/html:/usr/share/nginx/html"
+      - "./nginx-reverse-proxy/logs:/var/log/nginx"
     ports:
       - "80:80"
+      - "443:443"
 
   adminer:
     container_name: adminer
