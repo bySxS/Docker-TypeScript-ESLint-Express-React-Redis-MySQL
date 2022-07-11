@@ -1,6 +1,7 @@
 import { createClient } from 'redis'
 import { promisifyAll } from 'bluebird'
-import logger, { IError } from '../logger'
+import logger from '../logger'
+import { IError } from '../interface'
 
 
 const REDIS_HOST: string = process.env.REDIS_CACHE_HOST || 'localhost'
