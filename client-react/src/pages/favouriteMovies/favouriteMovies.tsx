@@ -32,4 +32,6 @@ const FavouriteMovies = () => {
   )
 }
 
+FavouriteMovies.displayName = 'FavouriteMovies'
+
 export default FavouriteMovies

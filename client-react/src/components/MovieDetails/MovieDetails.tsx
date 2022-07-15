@@ -73,7 +73,6 @@ const MovieDetails: FC<MovieDetailsItemProps> = ({ modulePage }) => {
     )
   }
 
-  // TODO: изменить вид файла
   return (
       <div className={classDetails.details_body}>
         <Card
@@ -131,5 +130,7 @@ const MovieDetails: FC<MovieDetailsItemProps> = ({ modulePage }) => {
       </div>
   )
 }
+
+MovieDetails.displayName = 'MovieDetails'
 
 export default MovieDetails

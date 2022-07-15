@@ -51,4 +51,6 @@ const Movies = () => {
   )
 }
 
+Movies.displayName = 'Movies'
+
 export default Movies

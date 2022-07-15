@@ -21,12 +21,27 @@ export const setupStore = () => {
   })
 }
 
-// Can still subscribe to the store
-if (SUBSCRIBE_STORE) {
-  setupStore().subscribe(() =>
-    console.log(setupStore().getState()))
-}
-
 export type RootState = ReturnType<typeof rootReducer>
 export type AppStore = ReturnType<typeof setupStore>
 export type AppDispatch = AppStore['dispatch']
+
+if (SUBSCRIBE_STORE) {
+  let currentValue: RootState
+  const handleChange = () => {
+    const previousValue = currentValue
+    currentValue = setupStore().getState()
+
+    if (previousValue !== currentValue) {
+      console.log(
+        'Some deep nested property changed from',
+        previousValue,
+        'to',
+        currentValue
+      )
+    }
+  }
+
+  const unsubscribe =
+  setupStore().subscribe(handleChange)
+  unsubscribe()
+}

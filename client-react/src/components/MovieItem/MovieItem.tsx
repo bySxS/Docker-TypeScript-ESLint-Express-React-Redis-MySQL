@@ -52,4 +52,6 @@ const MovieItem: FC<MovieItemProps> = ({ movie, checkLike, modulePage }) => {
   )
 }
 
+MovieItem.displayName = 'MovieItem'
+
 export default MovieItem
